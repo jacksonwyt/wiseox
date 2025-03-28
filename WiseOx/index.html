@@ -196,18 +196,34 @@
             overflow: hidden;
             position: relative;
             width: 100%;
+            padding: 20px 0;
         }
         
         .logo-scroll-inner {
             display: flex;
             white-space: nowrap;
-            animation: logoScroll 20s linear infinite;
+            animation: logoScroll 60s linear infinite;
+        }
+        
+        .logo-scroll-inner img {
+            width: 120px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        @keyframes logoScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
         
         .client-logo {
             flex: 0 0 auto;
-            width: 120px;
-            margin: 0 20px;
+            width: 160px;
+            margin: 0 30px;
             filter: grayscale(100%);
             opacity: 0.7;
             transition: all 0.3s ease;
@@ -492,6 +508,7 @@
         <div class="logo-container">
             <div class="logo-scroll">
                 <div class="logo-scroll-inner">
+                    <div>
                         <div class="client-logo">
                             <img src="images/logos/MajesticPure_logo.png" alt="MajesticPure">
                         </div>
@@ -505,6 +522,44 @@
                             <img src="images/logos/Ganix_logo.png" alt="Ganix">
                         </div>
                         <div class="client-logo">
+                            <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/MADO_logo.png" alt="MADO">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/phrasly_logo.png" alt="Phrasly">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/utopia_logo.png" alt="Utopia">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="client-logo">
+                            <img src="images/logos/MajesticPure_logo.png" alt="MajesticPure">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/SoulSpa_logo.png" alt="SoulSpa">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/Ganix_logo.png" alt="Ganix">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/MADO_logo.png" alt="MADO">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/phrasly_logo.png" alt="Phrasly">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/utopia_logo.png" alt="Utopia">
+                        </div>
+                    </div>
                             <img src="images/logos/MADO_logo.png" alt="MADO">
                         </div>
                         <div class="client-logo">
@@ -512,6 +567,9 @@
                         </div>
                         <div class="client-logo">
                             <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/phrasly_logo.png" alt="Phrasly">
                         </div>
                         <!-- Duplicate logos for infinite scroll effect -->
                         <div class="client-logo">
@@ -534,6 +592,9 @@
                         </div>
                         <div class="client-logo">
                             <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice">
+                        </div>
+                        <div class="client-logo">
+                            <img src="images/logos/phrasly_logo.png" alt="Phrasly">
                         </div>
                     </div>
                 </div>
@@ -676,17 +737,7 @@
                     </ul>
                 </div>
                 
-                <div class="footer-services">
-                    <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="#">Digital Marketing</a></li>
-                        <li><a href="#">Content Creation</a></li>
-                        <li><a href="#">SEO Optimization</a></li>
-                        <li><a href="#">Social Media Management</a></li>
-                        <li><a href="#">PPC Advertising</a></li>
-                    </ul>
-                </div>
-                
+
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
                     <ul>

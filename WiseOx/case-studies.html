@@ -190,6 +190,23 @@
             transform: translateY(-5px);
         }
         
+        .case-study-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .case-study-header .company-logo {
+            width: 120px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .case-study-header .content {
+            flex: 1;
+        }
+
         .case-study-header h3 {
             font-size: 24px;
             margin-bottom: 10px;
@@ -227,6 +244,49 @@
             color: var(--secondary-color);
         }
         
+        .other-partners-section {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .logo-scroll {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .logo-scroll-inner {
+            display: flex;
+            white-space: nowrap;
+            animation: logoScroll 20s linear infinite;
+        }
+        
+        .logo-scroll-inner img {
+            max-width: 150px;
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            margin: 0 30px;
+        }
+        
+        .logo-scroll-inner img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        @keyframes logoScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
         @media (max-width: 768px) {
             .case-studies-section {
                 padding: 100px 0 60px;
@@ -234,6 +294,11 @@
             
             .case-studies-list {
                 grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 20px;
             }
         }
     </style>
@@ -295,44 +360,105 @@
             <h1 class="section-title animate-slide-up">Case Studies</h1>
             
             <div class="case-studies-list">
-                <!-- Case Study 1 -->
+                <!-- Ganix -->
                 <div class="case-study-item animate-fade-in delay-200">
                     <div class="case-study-header">
-                        <h3>Alfie's Choice</h3>
-                        <span class="case-study-category">E-commerce</span>
-                    </div>
-                    <p class="case-study-result">150% increase in online sales</p>
-                    <div class="case-study-details">
-                        <p>Through targeted social media campaigns and SEO optimization, we helped Alfie's Choice reach new customers and boost their online presence.</p>
-                        <a href="#" class="case-study-link">View Details →</a>
-                    </div>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="case-study-item animate-fade-in delay-300">
-                    <div class="case-study-header">
-                        <h3>Ganix</h3>
-                        <span class="case-study-category">B2B Services</span>
+                        <img src="images/logos/Ganix_logo.png" alt="Ganix" class="company-logo">
+                        <div class="content">
+                            <h3>Ganix</h3>
+                            <span class="case-study-category">E-commerce Growth</span>
+                        </div>
                     </div>
                     <p class="case-study-result">200% increase in lead generation</p>
                     <div class="case-study-details">
-                        <p>Implemented a comprehensive digital marketing strategy that significantly improved Ganix's market presence and lead acquisition.</p>
+                        <p>Revolutionizing B2B services through AI-powered marketing strategies and comprehensive digital solutions.</p>
                         <a href="#" class="case-study-link">View Details →</a>
                     </div>
                 </div>
 
-                <!-- Case Study 3 -->
-                <div class="case-study-item animate-fade-in delay-400">
+                <!-- Majestic Pure -->
+                <div class="case-study-item animate-fade-in delay-300">
                     <div class="case-study-header">
-                        <h3>MADO</h3>
-                        <span class="case-study-category">Retail</span>
+                        <img src="images/logos/MajesticPure_logo.png" alt="Majestic Pure" class="company-logo">
+                        <div class="content">
+                            <h3>Majestic Pure</h3>
+                            <span class="case-study-category">Brand Development</span>
+                        </div>
                     </div>
-                    <p class="case-study-result">85% increase in brand engagement</p>
+                    <p class="case-study-result">175% increase in online sales</p>
                     <div class="case-study-details">
-                        <p>Developed and executed a strategic content marketing plan that enhanced MADO's brand visibility and customer engagement.</p>
+                        <p>Building a premium beauty brand through strategic digital marketing and targeted e-commerce optimization.</p>
                         <a href="#" class="case-study-link">View Details →</a>
                     </div>
                 </div>
+
+                <!-- Phrasly -->
+                <div class="case-study-item animate-fade-in delay-400">
+                    <div class="case-study-header">
+                        <img src="images/logos/phrasly_logo.png" alt="Phrasly" class="company-logo">
+                        <div class="content">
+                            <h3>Phrasly</h3>
+                            <span class="case-study-category">SaaS Marketing</span>
+                        </div>
+                    </div>
+                    <p class="case-study-result">300% increase in user acquisition</p>
+                    <div class="case-study-details">
+                        <p>Scaling a language learning platform through targeted campaigns and innovative growth strategies.</p>
+                        <a href="#" class="case-study-link">View Details →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Partners Section -->
+            <div class="other-partners-section animate-fade-in delay-500">
+                <h2 class="section-title">Trusted By</h2>
+                <div class="logo-scroll">
+                    <div class="logo-scroll-inner">
+                        <div>
+                            <div class="client-logo">
+                                <img src="images/logos/AlfiesChoice.png" alt="Alfie's Choice">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/MADO_logo.png" alt="MADO">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/SoulSpa_logo.png" alt="Soul Spa">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="client-logo">
+                                <img src="images/logos/AlfiesChoice.png" alt="Alfie's Choice">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/MADO_logo.png" alt="MADO">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/SoulSpa_logo.png" alt="Soul Spa">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="client-logo">
+                                <img src="images/logos/AlfiesChoice.png" alt="Alfie's Choice">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/MADO_logo.png" alt="MADO">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                            </div>
+                            <div class="client-logo">
+                                <img src="images/logos/SoulSpa_logo.png" alt="Soul Spa">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </section>
@@ -399,7 +525,6 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 
                 <div class="footer-contact">
                     <h3>Contact Us</h3>

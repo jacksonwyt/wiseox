@@ -291,12 +291,16 @@
     white-space: nowrap;
 }
 
+.logo-scroll-inner > div {
+    display: flex;
+}
+
 @keyframes logoScroll {
-    0% {
+    from {
         transform: translateX(0);
     }
-    100% {
-        transform: translateX(-50%);
+    to {
+        transform: translateX(-100%);
     }
 }
 
