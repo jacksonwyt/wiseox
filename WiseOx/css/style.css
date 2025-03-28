@@ -262,8 +262,13 @@
     }
 
     .header {
-        padding-top: 80px;
+        padding-top: 70px;
         padding-bottom: 40px;
+        margin-top: 0;
+    }
+
+    .header-content {
+        padding-top: 20px;
     }
 
     .container {
@@ -296,7 +301,11 @@
 
     /* Navigation */
     .navbar {
-        padding: 10px 0;
+        padding: 8px 0;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
     .nav-menu {
@@ -372,9 +381,13 @@
     }
 
     .client-logo {
-        width: 100px;
-        margin: 0 12px;
-        padding: 8px;
+        width: 160px;
+        margin: 0 20px;
+        padding: 12px;
+    }
+
+    .logo-section {
+        padding: 30px 0;
     }
 
     /* Sections */
@@ -534,10 +547,11 @@
 
 /* Scroll Animations Section */
 .scroll-animations-section {
-    padding: 0;
+    padding: 80px 0 0;
     background-color: var(--light-color);
     position: relative;
     overflow: visible;
+    margin-top: 60px;
 }
 
 @media (max-width: 768px) {
