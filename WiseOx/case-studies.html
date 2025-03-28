@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - Wise Ox</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        :root {
+            --primary-color: #826ade;
+            --secondary-color: #b4abd4;
+            --text-color: #50504d;
+            --light-color: #ffffff;
+            --dark-color: #000000;
+            --background-color: #50504d;
+        }
+        
+        .case-studies-section {
+            padding: 120px 0 80px;
+            background-color: var(--light-color);
+        }
+        
+        .case-studies-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .case-study-item {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .case-study-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .case-study-header h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .case-study-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .case-study-result {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 20px 0;
+            color: var(--text-color);
+        }
+        
+        .case-study-details p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .case-study-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .case-study-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .case-studies-section {
+                padding: 100px 0 60px;
+            }
+            
+            .case-studies-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/wiseox_logo.png" alt="Wise Ox Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="case-studies.html" class="active">Case Studies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies-section">
+        <div class="container">
+            <h1 class="section-title animate-slide-up">Case Studies</h1>
+            
+            <div class="case-studies-list">
+                <!-- Case Study 1 -->
+                <div class="case-study-item animate-fade-in delay-200">
+                    <div class="case-study-header">
+                        <h3>Alfie's Choice</h3>
+                        <span class="case-study-category">E-commerce</span>
+                    </div>
+                    <p class="case-study-result">150% increase in online sales</p>
+                    <div class="case-study-details">
+                        <p>Through targeted social media campaigns and SEO optimization, we helped Alfie's Choice reach new customers and boost their online presence.</p>
+                        <a href="#" class="case-study-link">View Details →</a>
+                    </div>
+                </div>
+
+                <!-- Case Study 2 -->
+                <div class="case-study-item animate-fade-in delay-300">
+                    <div class="case-study-header">
+                        <h3>Ganix</h3>
+                        <span class="case-study-category">B2B Services</span>
+                    </div>
+                    <p class="case-study-result">200% increase in lead generation</p>
+                    <div class="case-study-details">
+                        <p>Implemented a comprehensive digital marketing strategy that significantly improved Ganix's market presence and lead acquisition.</p>
+                        <a href="#" class="case-study-link">View Details →</a>
+                    </div>
+                </div>
+
+                <!-- Case Study 3 -->
+                <div class="case-study-item animate-fade-in delay-400">
+                    <div class="case-study-header">
+                        <h3>MADO</h3>
+                        <span class="case-study-category">Retail</span>
+                    </div>
+                    <p class="case-study-result">85% increase in brand engagement</p>
+                    <div class="case-study-details">
+                        <p>Developed and executed a strategic content marketing plan that enhanced MADO's brand visibility and customer engagement.</p>
+                        <a href="#" class="case-study-link">View Details →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="images/wiseox_logo.png" alt="Wise Ox Logo">
+                    </div>
+                    <p>Innovative digital marketing solutions for your business growth</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@wiseox.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wise Ox. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

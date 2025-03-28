@@ -1,0 +1,21 @@
+CASE STUDY IMAGES
+
+Please add the following images to complete your website:
+
+1. case-study-1.jpg - Image for the MajesticPure case study
+   - Recommended size: 800x600px
+   - Content: Something related to e-commerce or product promotion
+
+2. case-study-2.jpg - Image for the Nexon Botanicals case study
+   - Recommended size: 800x600px
+   - Content: Something related to brand awareness or marketing
+
+3. case-study-3.jpg - Image for the SoulSpa case study
+   - Recommended size: 800x600px
+   - Content: Something related to websites or web development
+
+You can use your own images or placeholder images from services like:
+- https://placehold.co/
+- https://placeholder.com/
+
+Example: https://placehold.co/800x600?text=Case+Study+1 
