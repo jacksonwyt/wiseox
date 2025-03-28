@@ -99,7 +99,6 @@
 
 .case-study-item {
     padding: 40px 0;
-    border-bottom: 1px solid var(--secondary-color);
 }
 
 .case-study-item:last-child {
@@ -246,12 +245,192 @@
 }
 
 @media (max-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
+    /* Layout */
+    .contact-grid,
     .case-studies-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Typography */
+    h1 {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Navigation */
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100vh;
+        background: var(--light-color);
+        padding: 80px 30px;
+        transition: 0.3s ease;
+        overflow-y: auto;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-menu a {
+        font-size: 1.2rem;
+        padding: 12px 0;
+        display: block;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .mobile-menu-btn i {
+        font-size: 24px;
+        color: var(--text-color);
+    }
+
+    /* Buttons and Forms */
+    .btn {
+        padding: 12px 25px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 15px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+
+    /* Logos */
+    .logo img {
+        height: 45px;
+    }
+
+    .client-logo {
+        width: 120px;
+        margin: 0 15px;
+        padding: 10px;
+    }
+
+    /* Sections */
+    section {
+        padding: 60px 0;
+    }
+
+    .header {
+        padding-top: 100px;
+    }
+
+    /* Touch targets */
+    a, button, .btn, input[type='submit'] {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--light-color);
+        padding: 80px 30px;
+        transition: 0.3s ease;
+        overflow-y: auto;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 10px 0;
     }
 }
 
@@ -314,6 +493,13 @@
     transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+    .client-logo {
+        width: 100px;
+        margin: 0 15px;
+    }
+}
+
 .client-logo img {
     width: 100%;
     height: auto;
@@ -331,6 +517,70 @@
     background-color: var(--light-color);
     position: relative;
     overflow: visible;
+}
+
+@media (max-width: 768px) {
+    .scroll-animations-section {
+        padding: 40px 0;
+    }
+
+    .scroll-section {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .text-sidebar-wrapper {
+        position: relative;
+        height: auto;
+        padding: 20px 0;
+        top: auto;
+    }
+
+    .text-sidebar {
+        padding: 20px;
+    }
+
+    .step-item {
+        width: 100%;
+        margin-bottom: 30px;
+        padding: 15px;
+    }
+
+    .gifs-area {
+        position: relative;
+        height: auto;
+    }
+
+    .scroll-gif {
+        position: relative;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .scroll-gif.active {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .scroll-animations-section {
+        padding: 40px 0;
+    }
+
+    .scroll-section {
+        grid-template-columns: 1fr;
+    }
+
+    .text-sidebar-wrapper {
+        position: relative;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .step-item {
+        width: 100%;
+        margin-bottom: 30px;
+    }
 }
 
 /* Side-by-side layout for scrolling section */

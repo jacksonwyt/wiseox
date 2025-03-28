@@ -19,6 +19,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     
+
+    
     <style>
         :root {
             --primary-color: #826ade;
@@ -146,61 +148,98 @@
             }
         }
         
-        /* Header Styles */
-        .page-header {
-            padding: 120px 0 40px;
-            background-color: var(--light-color);
-            text-align: center;
-        }
-
-        .page-header h1 {
-            font-size: 42px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .page-header p {
-            font-size: 18px;
-            color: var(--text-color);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         .case-studies-section {
-            padding: 60px 0 80px;
+            padding: 180px 0 80px;
             background-color: var(--light-color);
         }
-        
+
         .case-studies-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
         }
-        
+
         .case-study-item {
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            flex: 1;
+            max-width: 360px;
+            text-align: center;
+            padding: 20px;
         }
-        
-        .case-study-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .case-study-header {
+
+        .company-logo {
+            width: 100%;
+            height: 140px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            justify-content: center;
+            margin-bottom: 24px;
         }
 
-        .case-study-header .company-logo {
-            width: 120px;
-            height: 60px;
+        .company-logo img {
+            max-width: 80%;
+            max-height: 100%;
             object-fit: contain;
+        }
+
+        .case-study-content {
+            padding: 0 20px;
+        }
+
+        .case-study-logo {
+            flex: 0 0 300px;
+        }
+        
+        .case-study-description {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+        
+        .case-study-result {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .case-study-result i {
+            margin-right: 12px;
+        }
+        
+        @media (max-width: 1024px) {
+            .case-studies-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .case-study-item {
+                max-width: 500px;
+                width: 100%;
+                margin-bottom: 60px;
+            }
+
+            .case-study-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .company-logo {
+                height: 120px;
+            }
+
+            .case-study-description {
+                font-size: 16px;
+            }
+
+            .case-study-result {
+                font-size: 20px;
+            }
         }
 
         .case-study-header .content {
@@ -215,7 +254,7 @@
         
         .case-study-category {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 12px 12px;
             background: var(--secondary-color);
             color: white;
             border-radius: 20px;
@@ -260,7 +299,7 @@
         .logo-scroll-inner {
             display: flex;
             white-space: nowrap;
-            animation: logoScroll 20s linear infinite;
+            animation: logoScroll 60s linear infinite;
         }
         
         .logo-scroll-inner img {
@@ -304,10 +343,7 @@
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
-    </div>
+
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -325,92 +361,53 @@
             </div>
         </div>
     </nav>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
-    </div>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="images/wiseox_logo.png" alt="Wise Ox Logo">
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="case-studies.html" class="active">Case Studies</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </nav>
+
 
     <!-- Case Studies Section -->
-    <!-- Header Section -->
-    <header class="page-header">
-        <div class="container">
-            <h1 class="animate-slide-up">Our Case Studies</h1>
-            <p class="animate-slide-up delay-100">Discover how we've helped businesses achieve their digital marketing goals</p>
-        </div>
-    </header>
-
     <section class="case-studies-section">
-        <div class="container">
-            <h1 class="section-title animate-slide-up">Case Studies</h1>
-            
-            <div class="case-studies-list">
-                <!-- Ganix -->
-                <div class="case-study-item animate-fade-in delay-200">
-                    <div class="case-study-header">
-                        <img src="images/logos/Ganix_logo.png" alt="Ganix" class="company-logo">
-                        <div class="content">
-                            <h3>Ganix</h3>
-                            <span class="case-study-category">E-commerce Growth</span>
-                        </div>
-                    </div>
-                    <p class="case-study-result">200% increase in lead generation</p>
-                    <div class="case-study-details">
-                        <p>Revolutionizing B2B services through AI-powered marketing strategies and comprehensive digital solutions.</p>
-                        <a href="#" class="case-study-link">View Details →</a>
-                    </div>
+        <div class="case-studies-list">
+            <!-- Ganix -->
+            <div class="case-study-item">
+                <div class="company-logo">
+                    <img src="images/logos/Ganix_logo.png" alt="Ganix">
                 </div>
-
-                <!-- Majestic Pure -->
-                <div class="case-study-item animate-fade-in delay-300">
-                    <div class="case-study-header">
-                        <img src="images/logos/MajesticPure_logo.png" alt="Majestic Pure" class="company-logo">
-                        <div class="content">
-                            <h3>Majestic Pure</h3>
-                            <span class="case-study-category">Brand Development</span>
-                        </div>
-                    </div>
-                    <p class="case-study-result">175% increase in online sales</p>
-                    <div class="case-study-details">
-                        <p>Building a premium beauty brand through strategic digital marketing and targeted e-commerce optimization.</p>
-                        <a href="#" class="case-study-link">View Details →</a>
-                    </div>
-                </div>
-
-                <!-- Phrasly -->
-                <div class="case-study-item animate-fade-in delay-400">
-                    <div class="case-study-header">
-                        <img src="images/logos/phrasly_logo.png" alt="Phrasly" class="company-logo">
-                        <div class="content">
-                            <h3>Phrasly</h3>
-                            <span class="case-study-category">SaaS Marketing</span>
-                        </div>
-                    </div>
-                    <p class="case-study-result">300% increase in user acquisition</p>
-                    <div class="case-study-details">
-                        <p>Scaling a language learning platform through targeted campaigns and innovative growth strategies.</p>
-                        <a href="#" class="case-study-link">View Details →</a>
+                <div class="case-study-content">
+                    <p class="case-study-description">Revolutionizing B2B services through AI-powered marketing strategies and comprehensive digital solutions.</p>
+                    <div class="case-study-result">
+                        <i class="fas fa-chart-line"></i> 200% increase in lead generation
                     </div>
                 </div>
             </div>
+            
+            <!-- Majestic Pure -->
+            <div class="case-study-item">
+                <div class="company-logo">
+                    <img src="images/logos/MajesticPure_logo.png" alt="Majestic Pure">
+                </div>
+                <div class="case-study-content">
+                    <p class="case-study-description">Building a premium beauty brand through strategic digital marketing and targeted e-commerce optimization.</p>
+                    <div class="case-study-result">
+                        <i class="fas fa-shopping-cart"></i> 175% increase in online sales
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phrasly -->
+            <div class="case-study-item">
+                <div class="company-logo">
+                    <img src="images/logos/phrasly_logo.png" alt="Phrasly">
+                </div>
+                <div class="case-study-content">
+                    <p class="case-study-description">Scaling a language learning platform through targeted campaigns and innovative growth strategies.</p>
+                    <div class="case-study-result">
+                        <i class="fas fa-users"></i> 300% increase in user acquisition
+                    </div>
+                </div>
+            </div>
+        </div>
 
             <!-- Other Partners Section -->
-            <div class="other-partners-section animate-fade-in delay-500">
+            <div class="other-partners-section">
                 <h2 class="section-title">Trusted By</h2>
                 <div class="logo-scroll">
                     <div class="logo-scroll-inner">
@@ -478,22 +475,10 @@
             $(this).toggleClass('active');
         });
         
-        // Animation on scroll
-        function animateOnScroll() {
-            $('.animate-slide-up, .animate-fade-in').each(function() {
-                const elementTop = $(this).offset().top;
-                const windowBottom = $(window).scrollTop() + $(window).height();
-                
-                if (elementTop < windowBottom) {
-                    $(this).addClass('active');
-                }
-            });
-        }
-        
-        // Run animation check on page load and scroll
-        $(document).ready(function() {
-            animateOnScroll();
-            $(window).on('scroll', animateOnScroll);
+        // Mobile menu toggle
+        $('.menu-btn').on('click', function() {
+            $('.nav-links').toggleClass('active');
+            $(this).toggleClass('active');
         });
     </script>
 
@@ -660,9 +645,6 @@
         }
     </style>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     
@@ -692,11 +674,32 @@
             });
         }
 
-        // Set initial opacity for animation elements
-        $('.animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-fade-in').css('opacity', '0');
-
-        // Run animation check on page load and scroll
+        // Mobile menu functionality only
         $(document).ready(function() {
+            // Initialize animated metrics
+            const metrics = document.querySelectorAll('.metric-value');
+            const countUps = Array.from(metrics).map((metric) => {
+                const target = parseFloat(metric.getAttribute('data-target'));
+                return new CountUp(metric, target, {
+                    startVal: 0,
+                    duration: 2.5,
+                    suffix: '%'
+                });
+            });
+
+            // Set up Intersection Observer for metrics
+            const caseStudiesSection = document.querySelector('.case-studies-section');
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    countUps.forEach((countUp) => countUp.start());
+                    observer.unobserve(caseStudiesSection); // Run once
+                }
+            }, { threshold: 0.5 });
+
+            // Start observing
+            observer.observe(caseStudiesSection);
+
+            // Run scroll animations
             animateOnScroll();
             $(window).on('scroll', animateOnScroll);
         });
