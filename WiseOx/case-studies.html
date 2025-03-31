@@ -288,7 +288,7 @@
             text-align: center;
         }
 
-        .logo-scroll {
+        .logo-section {
             overflow: hidden;
             position: relative;
             width: 100%;
@@ -296,13 +296,21 @@
             margin-top: 40px;
         }
         
-        .logo-scroll-inner {
-            display: flex;
-            white-space: nowrap;
-            animation: logoScroll 60s linear infinite;
+        .swiper {
+            width: 100%;
+            height: 100%;
         }
         
-        .logo-scroll-inner img {
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .client-logo {
             max-width: 150px;
             height: 60px;
             object-fit: contain;
@@ -312,20 +320,11 @@
             margin: 0 30px;
         }
         
-        .logo-scroll-inner img:hover {
+        .client-logo:hover {
             filter: grayscale(0%);
             opacity: 1;
         }
         
-        @keyframes logoScroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
         @media (max-width: 768px) {
             .case-studies-section {
                 padding: 100px 0 60px;
@@ -467,48 +466,58 @@
             <!-- Other Partners Section -->
             <div class="other-partners-section">
                 <h2 class="section-title">Trusted By</h2>
-                <div class="logo-scroll">
-                    <div class="logo-scroll-inner">
-                        <div>
-                            <div class="client-logo">
-                                <img src="images/logos/AlfiesChoice.png" alt="Alfie's Choice">
+                <div class="logo-section">
+                    <div class="swiper logo-swiper">
+                        <div class="swiper-wrapper">
+                            <!-- First set of logos -->
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/MajesticPure_logo.png" alt="MajesticPure" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/MADO_logo.png" alt="MADO">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/SoulSpa_logo.png" alt="SoulSpa" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/SoulSpa_logo.png" alt="Soul Spa">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/Ganix_logo.png" alt="Ganix" loading="lazy">
                             </div>
-                        </div>
-                        <div>
-                            <div class="client-logo">
-                                <img src="images/logos/AlfiesChoice.png" alt="Alfie's Choice">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/MADO_logo.png" alt="MADO">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/MADO_logo.png" alt="MADO" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/phrasly_logo.png" alt="Phrasly" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/SoulSpa_logo.png" alt="Soul Spa">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/utopia_logo.png" alt="Utopia" loading="lazy">
                             </div>
-                        </div>
-                        <div>
-                            <div class="client-logo">
-                                <img src="images/logos/AlfiesChoice.png" alt="Alfie's Choice">
+                            <!-- Duplicate set of logos for seamless loop -->
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/MajesticPure_logo.png" alt="MajesticPure" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/MADO_logo.png" alt="MADO">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/SoulSpa_logo.png" alt="SoulSpa" loading="lazy">
                             </div>
-                            <div class="client-logo">
-                                <img src="images/logos/SoulSpa_logo.png" alt="Soul Spa">
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/Ganix_logo.png" alt="Ganix" loading="lazy">
+                            </div>
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice" loading="lazy">
+                            </div>
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/MADO_logo.png" alt="MADO" loading="lazy">
+                            </div>
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/phrasly_logo.png" alt="Phrasly" loading="lazy">
+                            </div>
+                            <div class="swiper-slide client-logo">
+                                <img src="images/logos/utopia_logo.png" alt="Utopia" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -525,162 +534,44 @@
         // Preloader
         $(window).on('load', function() {
             $('.preloader').fadeOut('slow');
-        });
-        
-        // Mobile menu toggle
-        $('.menu-btn').on('click', function() {
-            $('.nav-links').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-        
-        // Mobile menu toggle
-        $('.menu-btn').on('click', function() {
-            $('.nav-links').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-    </script>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/main.js"></script>
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <div class="footer-logo">
-                        <img src="images/wiseox_logo.png" alt="Wise Ox">
-                    </div>
-                    <p>Innovative digital marketing solutions for businesses seeking growth and success in the digital landscape.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="case-studies.html">Case Studies</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> PO Box 5000 PMB 60, Rancho Santa Fe, CA 92067</li>
-                        <li><i class="fas fa-phone"></i> 858.705.7516</li>
-                        <li><i class="fas fa-envelope"></i> info@wiseoxmedia.com</li>
-                    </ul>
-                </div>
-            </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2025 Wise Ox. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <style>
-        .footer {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-info {
-            max-width: 400px;
-        }
-
-        .footer-info p {
-            margin: 20px 0;
-            color: var(--light-color);
-            opacity: 0.8;
-        }
-
-        .footer-logo img {
-            height: 65px;
-        }
-
-        .footer h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: var(--light-color);
-        }
-
-        .footer ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer ul li a {
-            color: var(--light-color);
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer ul li a:hover {
-            opacity: 1;
-        }
-
-        .footer-contact ul li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--light-color);
-            opacity: 0.8;
-        }
-
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            color: var(--light-color);
-            opacity: 0.6;
-        }
-
-        @media (max-width: 992px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-            }
-
-            .footer-info {
-                grid-column: 1 / -1;
-                text-align: center;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .footer-contact ul li {
-                justify-content: center;
-            }
-        }
-    </style>
-
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    
-    <script>
-        // Preloader
-        $(window).on('load', function() {
-            $('.preloader').fadeOut('slow');
+            // Initialize Swiper for logo section with improved mobile configuration
+            var logoSwiper = new Swiper('.logo-swiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 30,
+                speed: 8000,
+                autoplay: {
+                    delay: 1,
+                    disableOnInteraction: false
+                },
+                allowTouchMove: true, // Enable touch movement on mobile
+                loop: true,
+                loopedSlides: 8,
+                watchSlidesProgress: true,
+                watchSlidesVisibility: true,
+                grabCursor: true, // Show grab cursor for better UX
+                pauseOnMouseEnter: true, // Pause on mouse enter for better desktop experience
+                breakpoints: {
+                    // when window width is >= 320px
+                    320: {
+                        spaceBetween: 10,
+                        speed: 5000
+                    },
+                    // when window width is >= 480px
+                    480: {
+                        spaceBetween: 20,
+                        speed: 6000
+                    },
+                    // when window width is >= 768px
+                    768: {
+                        spaceBetween: 30,
+                        speed: 8000
+                    }
+                }
+            });
         });
-
-        // Mobile Menu Toggle
+        
+        // Mobile menu toggle
         $('.menu-btn').on('click', function() {
             $('.nav-links').toggleClass('active');
             $(this).toggleClass('active');
@@ -730,5 +621,41 @@
             $(window).on('scroll', animateOnScroll);
         });
     </script>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="images/wiseox_logo.png" alt="Wise Ox">
+                    </div>
+                    <p>Innovative digital marketing solutions for businesses seeking growth and success in the digital landscape.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> PO Box 5000 PMB 60 Rancho Santa Fe, CA 92067</li>
+                        <li><i class="fas fa-phone"></i> 858.705.7516</li>
+                        <li><i class="fas fa-envelope"></i> info@wiseoxmedia.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wise Ox. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
