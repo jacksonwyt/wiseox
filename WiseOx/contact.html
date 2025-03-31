@@ -179,9 +179,9 @@
 
         .footer-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
         .footer-info {
@@ -226,28 +226,6 @@
             opacity: 0.8;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-color);
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
         .footer-bottom {
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -269,10 +247,6 @@
                 grid-column: 1 / -1;
                 text-align: center;
                 margin: 0 auto;
-            }
-
-            .social-links {
-                justify-content: center;
             }
         }
 
@@ -329,17 +303,17 @@
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <h3>Location</h3>
-                        <p>123 Business Street<br>San Francisco, CA 94105</p>
+                        <p>PO Box 5000 PMB 60<br>Rancho Santa Fe, CA 92067</p>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
                         <h3>Email</h3>
-                        <p>info@wiseox.com</p>
+                        <p>info@wiseoxmedia.com</p>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
                         <h3>Phone</h3>
-                        <p>(555) 123-4567</p>
+                        <p>858.705.7516</p>
                     </div>
                 </div>
                 
@@ -376,12 +350,6 @@
                         <img src="images/wiseox_logo.png" alt="Wise Ox">
                     </div>
                     <p>Innovative digital marketing solutions for businesses seeking growth and success in the digital landscape.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
                 </div>
                 
                 <div class="footer-links">
@@ -398,9 +366,9 @@
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Marketing St, San Francisco, CA</li>
-                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
-                        <li><i class="fas fa-envelope"></i> info@wiseox.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> PO Box 5000 PMB 60, Rancho Santa Fe, CA 92067</li>
+                        <li><i class="fas fa-phone"></i> 858.705.7516</li>
+                        <li><i class="fas fa-envelope"></i> info@wiseoxmedia.com</li>
                     </ul>
                 </div>
             </div>

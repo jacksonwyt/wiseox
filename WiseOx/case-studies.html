@@ -340,6 +340,32 @@
                 gap: 20px;
             }
         }
+
+        /* Typewriter effect styles */
+        .case-study-description, .case-study-result {
+            visibility: hidden;
+        }
+        
+        .typewriter-container {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .typewriter-container::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--primary-color);
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -365,6 +391,38 @@
 
     <!-- Case Studies Section -->
     <section class="case-studies-section">
+        <script>
+        function typeWriter(element, text, speed = 50) {
+            element.style.visibility = 'visible';
+            element.innerHTML = '';
+            
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+            return new Promise(resolve => setTimeout(resolve, text.length * speed + 500));
+        }
+
+        async function typewriterEffect() {
+            const elements = document.querySelectorAll('.case-study-description, .case-study-result');
+            const promises = [];
+            
+            elements.forEach(element => {
+                const text = element.textContent;
+                promises.push(typeWriter(element, text));
+            });
+            
+            await Promise.all(promises);
+        }
+
+        // Run the effect when the page loads
+        document.addEventListener('DOMContentLoaded', typewriterEffect);
+        </script>
         <div class="case-studies-list">
             <!-- Ganix -->
             <div class="case-study-item">
@@ -372,9 +430,9 @@
                     <img src="images/logos/Ganix_logo.png" alt="Ganix">
                 </div>
                 <div class="case-study-content">
-                    <p class="case-study-description">Revolutionizing B2B services through AI-powered marketing strategies and comprehensive digital solutions.</p>
+                    <p class="case-study-description">Two product releases, sold out back to back through social media speedrun.</p>
                     <div class="case-study-result">
-                        <i class="fas fa-chart-line"></i> 200% increase in lead generation
+                        <i class="fas fa-chart-line"></i> 13.7 Million views and 17.9K followers with the Wise Ox strategy
                     </div>
                 </div>
             </div>
@@ -385,9 +443,9 @@
                     <img src="images/logos/MajesticPure_logo.png" alt="Majestic Pure">
                 </div>
                 <div class="case-study-content">
-                    <p class="case-study-description">Building a premium beauty brand through strategic digital marketing and targeted e-commerce optimization.</p>
+                    <p class="case-study-description">Achieved best seller status for Aromatherapy products on Amazon after being partnered with Creators in cosmetics industry.</p>
                     <div class="case-study-result">
-                        <i class="fas fa-shopping-cart"></i> 175% increase in online sales
+                        <i class="fas fa-shopping-cart"></i> 8 figure annual recurring revenue and hundreds of thousand of reviews
                     </div>
                 </div>
             </div>
@@ -398,9 +456,9 @@
                     <img src="images/logos/phrasly_logo.png" alt="Phrasly">
                 </div>
                 <div class="case-study-content">
-                    <p class="case-study-description">Scaling a language learning platform through targeted campaigns and innovative growth strategies.</p>
+                    <p class="case-study-description">Attacked the college student niche with the Wise Ox media strategy, with a younger, entertaining content theme became one of the largest student tools on the market</p>
                     <div class="case-study-result">
-                        <i class="fas fa-users"></i> 300% increase in user acquisition
+                        <i class="fas fa-graduation-cap"></i> $12M annual recurring revenue with a 15k follower increase
                     </div>
                 </div>
             </div>
@@ -494,12 +552,6 @@
                         <img src="images/wiseox_logo.png" alt="Wise Ox">
                     </div>
                     <p>Innovative digital marketing solutions for businesses seeking growth and success in the digital landscape.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
                 </div>
                 
                 <div class="footer-links">
@@ -514,9 +566,9 @@
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Marketing St, San Francisco, CA</li>
-                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
-                        <li><i class="fas fa-envelope"></i> info@wiseox.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> PO Box 5000 PMB 60, Rancho Santa Fe, CA 92067</li>
+                        <li><i class="fas fa-phone"></i> 858.705.7516</li>
+                        <li><i class="fas fa-envelope"></i> info@wiseoxmedia.com</li>
                     </ul>
                 </div>
             </div>
@@ -583,28 +635,6 @@
             opacity: 0.8;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-color);
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
         .footer-bottom {
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -626,10 +656,6 @@
                 grid-column: 1 / -1;
                 text-align: center;
                 margin: 0 auto;
-            }
-
-            .social-links {
-                justify-content: center;
             }
         }
 
