@@ -1107,13 +1107,18 @@ img {
         height: auto;
         max-height: none;
         overflow: visible;
+        position: relative;
     }
     
     .text-sidebar-wrapper {
         position: sticky;
         top: 80px;
-        height: auto;
+        height: fit-content;
+        min-height: 300px;
+        max-height: calc(100vh - 100px);
         padding-right: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .step-number {
