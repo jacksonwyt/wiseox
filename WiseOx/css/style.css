@@ -1103,9 +1103,12 @@ img {
 /* Mobile-specific styling for step indicators */
 @media (max-width: 768px) {
     .text-sidebar {
-        position: relative;
+        position: sticky;
+        top: 80px;
         padding: 20px;
         width: 100%;
+        background: white;
+        z-index: 10;
     }
 
     .step-item {
