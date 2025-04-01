@@ -1104,9 +1104,16 @@ img {
 @media (max-width: 768px) {
     .text-sidebar {
         padding: 20px;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+    
+    .text-sidebar-wrapper {
+        height: auto;
     }
     
     .step-number {
-        font-size: 36px;  
+        font-size: 36px;
     }
 }
