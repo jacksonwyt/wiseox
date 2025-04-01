@@ -1110,7 +1110,10 @@ img {
     }
     
     .text-sidebar-wrapper {
+        position: sticky;
+        top: 80px;
         height: auto;
+        padding-right: 0;
     }
     
     .step-number {
