@@ -899,12 +899,13 @@ img {
 /* Extra small devices (phones) */
 @media (max-width: 575.98px) {
     .header {
-        padding-top: 80px;
+        padding-top: 100px;  /* Increased padding to prevent navbar overlap */
         padding-bottom: 30px;
     }
     
     .header h1 {
         font-size: 32px;
+        margin-top: 20px;  /* Add space above the title */
     }
     
     .header p {
@@ -922,6 +923,18 @@ img {
     }
     
     .header-image {
+        display: block;  /* Show the main logo */
+        min-width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .header-image img {
+        max-width: 200px;  /* Control the logo size */
+        height: auto;
+    }
+
+    /* Hide navbar logo on home page only */
+    .navbar-home .logo {
         display: none;
     }
     
