@@ -908,7 +908,21 @@ img {
     }
     
     .header p {
-        font-size: 16px;
+        display: none;
+    }
+    
+    .header .btn {
+        display: none;
+    }
+    
+    .header-content {
+        text-align: center;
+        min-width: 100%;
+        padding-right: 0;
+    }
+    
+    .header-image {
+        display: none;
     }
     
     .section-heading h2 {
