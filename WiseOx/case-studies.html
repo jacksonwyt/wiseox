@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Wise Ox Media's case studies and success stories. Learn how our digital marketing strategies have helped clients achieve their business goals.">
+    <meta name="keywords" content="case studies, digital marketing results, marketing success stories, brand strategy examples, content creation results">
+    <meta name="author" content="Wise Ox Media">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wiseoxmedia.com/case-studies.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Case Studies - Wise Ox Media Marketing Agency">
+    <meta property="og:description" content="See how our digital marketing strategies have helped clients achieve measurable results and business growth.">
+    <meta property="og:image" content="https://wiseoxmedia.com/images/wiseox_logo.png">
+    <meta property="og:url" content="https://wiseoxmedia.com/case-studies.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Studies - Wise Ox Media Marketing Agency">
+    <meta name="twitter:description" content="See how our digital marketing strategies have helped clients achieve measurable results and business growth.">
+    <meta name="twitter:image" content="https://wiseoxmedia.com/images/wiseox_logo.png">
+    
     <title>Case Studies - Wise Ox</title>
     
     <!-- Font Awesome -->
@@ -19,17 +40,31 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     
+    <!-- Structured Data - BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://wiseoxmedia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Case Studies",
+          "item": "https://wiseoxmedia.com/case-studies.html"
+        }
+      ]
+    }
+    </script>
+    
 
     
-    <style>
-        :root {
-            --primary-color: #826ade;
-            --secondary-color: #b4abd4;
-            --text-color: #50504d;
-            --light-color: #ffffff;
-            --dark-color: #000000;
-            --background-color: #50504d;
-        }
+    <!-- Styles moved to style.css -->
 
         * {
             margin: 0;
@@ -374,14 +409,16 @@
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="images/wiseox_logo.png" alt="Wise Ox Logo">
+                <img src="images/wiseox_logo.png" alt="Wise Ox">
             </a>
-            <ul class="nav-links">
+            
+            <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="case-studies.html" class="active">Case Studies</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="menu-btn">
+            
+            <div class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -571,10 +608,29 @@
             });
         });
         
-        // Mobile menu toggle
-        $('.menu-btn').on('click', function() {
-            $('.nav-links').toggleClass('active');
+        // Mobile menu toggle with accessibility improvements
+        $('.mobile-menu-btn').on('click', function() {
+            $('.nav-menu').toggleClass('active');
             $(this).toggleClass('active');
+            
+            // Update ARIA attributes
+            $(this).attr('aria-expanded', $('.nav-menu').hasClass('active'));
+        });
+        
+        // Close menu when clicking outside
+        $(document).on('click', function(event) {
+            if (!$(event.target).closest('.mobile-menu-btn, .nav-menu').length) {
+                $('.nav-menu').removeClass('active');
+                $('.mobile-menu-btn').removeClass('active');
+                $('.mobile-menu-btn').attr('aria-expanded', 'false');
+            }
+        });
+        
+        // Close menu when clicking a menu item
+        $('.nav-menu a').click(function() {
+            $('.nav-menu').removeClass('active');
+            $('.mobile-menu-btn').removeClass('active');
+            $('.mobile-menu-btn').attr('aria-expanded', 'false');
         });
 
         // Animation on scroll

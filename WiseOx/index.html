@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wise Ox is a premier digital marketing agency specializing in brand strategy, content creation, and growth marketing for businesses of all sizes.">
+    <meta name="keywords" content="digital marketing, brand strategy, content creation, marketing agency, growth marketing">
+    <meta name="author" content="Wise Ox Media">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://wiseoxmedia.com/">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Wise Ox - Digital Marketing Agency">
+    <meta property="og:description" content="Premier digital marketing agency specializing in brand strategy, content creation, and growth marketing solutions.">
+    <meta property="og:image" content="https://wiseoxmedia.com/images/wiseox_logo.png">
+    <meta property="og:url" content="https://wiseoxmedia.com/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wise Ox - Digital Marketing Agency">
+    <meta name="twitter:description" content="Premier digital marketing agency specializing in brand strategy, content creation, and growth marketing solutions.">
+    <meta name="twitter:image" content="https://wiseoxmedia.com/images/wiseox_logo.png">
+    
     <title>Wise Ox - Digital Marketing Agency</title>
     
     <!-- Font Awesome -->
@@ -21,6 +42,77 @@
     
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Initialize Swiper for logo scroll
+            new Swiper('.logo-swiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 30,
+                loop: true,
+                speed: 3000,
+                autoplay: {
+                    delay: 1,
+                    disableOnInteraction: false
+                },
+                pauseOnMouseEnter: true,
+                grabCursor: true
+            });
+
+            // Scroll Animations Setup
+            function setupScrollAnimations() {
+                const scrollGifs = document.querySelectorAll('.scroll-gif');
+                const stepItems = document.querySelectorAll('.step-item');
+                
+                // Remove any existing observers
+                if (window.scrollObserver) {
+                    window.scrollObserver.disconnect();
+                }
+
+                // Create new intersection observer
+                window.scrollObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const gif = entry.target;
+                            const index = Array.from(scrollGifs).indexOf(gif);
+                            
+                            // Remove active class from all items
+                            scrollGifs.forEach(g => g.classList.remove('active'));
+                            stepItems.forEach(item => item.classList.remove('active'));
+                            
+                            // Add active class to current items
+                            gif.classList.add('active');
+                            if (stepItems[index]) {
+                                stepItems[index].classList.add('active');
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.6,
+                    rootMargin: '-10% 0px -10% 0px'
+                });
+                
+                // Observe all GIFs
+                scrollGifs.forEach(gif => window.scrollObserver.observe(gif));
+            }
+
+            // Initialize scroll animations
+            setupScrollAnimations();
+            
+            // Reinitialize on resize with debounce
+            let resizeTimer;
+            $(window).on('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(setupScrollAnimations, 250);
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Preloader -->
@@ -267,277 +359,5 @@
     <div class="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </div>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="js/main.js"></script>
-    
-    <script>
-        window.addEventListener('load', function() {
-            // Initialize Swiper for logo section with improved mobile configuration
-            var logoSwiper = new Swiper('.logo-swiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 30,
-                speed: 8000,
-                autoplay: {
-                    delay: 1,
-                    disableOnInteraction: false
-                },
-                allowTouchMove: true, // Enable touch movement on mobile
-                loop: true,
-                loopedSlides: 8,
-                watchSlidesProgress: true,
-                watchSlidesVisibility: true,
-                grabCursor: true, // Show grab cursor for better UX
-                pauseOnMouseEnter: true, // Pause on mouse enter for better desktop experience
-                breakpoints: {
-                    // when window width is >= 320px
-                    320: {
-                        spaceBetween: 10,
-                        speed: 5000
-                    },
-                    // when window width is >= 480px
-                    480: {
-                        spaceBetween: 20,
-                        speed: 6000
-                    },
-                    // when window width is >= 768px
-                    768: {
-                        spaceBetween: 30,
-                        speed: 8000
-                    }
-                }
-            });
-        });
-
-        // Mobile Menu Toggle with improved handling
-        $(document).ready(function() {
-            // Hide preloader on document ready (fallback)
-            window.addEventListener('load', () => {
-                document.querySelector('.preloader').style.display = 'none';
-            });
-            
-            // Improved mobile menu toggle with accessibility
-            $('.mobile-menu-btn').click(function(e) {
-                e.preventDefault();
-                $('.nav-menu').toggleClass('active');
-                
-                // Toggle ARIA expanded state for accessibility
-                const isExpanded = $(this).attr('aria-expanded') === 'true';
-                $(this).attr('aria-expanded', !isExpanded);
-                
-                // Prevent body scrolling when menu is open on mobile
-                if ($('.nav-menu').hasClass('active')) {
-                    $('body').addClass('menu-open');
-                } else {
-                    $('body').removeClass('menu-open');
-                }
-            });
-            
-            // Close menu when clicking outside or on menu item
-            $(document).click(function(event) {
-                if (!$(event.target).closest('.mobile-menu-btn, .nav-menu').length) {
-                    $('.nav-menu').removeClass('active');
-                    $('.mobile-menu-btn').attr('aria-expanded', 'false');
-                    $('body').removeClass('menu-open');
-                }
-            });
-            
-            // Close menu when clicking on menu item
-            $('.nav-menu a').click(function() {
-                $('.nav-menu').removeClass('active');
-                $('.mobile-menu-btn').attr('aria-expanded', 'false');
-                $('body').removeClass('menu-open');
-            });
-            
-            // Smooth scrolling for anchor links with improved mobile handling
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return; // Skip if it's just '#'
-                    
-                    const target = document.querySelector(targetId);
-                    if (!target) return; // Skip if target element doesn't exist
-                    
-                    // Different offset based on screen size for better positioning
-                    let offset = 80;
-                    if (window.innerWidth < 768) {
-                        offset = 60; // Smaller offset on mobile
-                    }
-                    
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Scroll to top button
-            const scrollTopBtn = document.querySelector('.scroll-top');
-            if (scrollTopBtn) {
-                window.addEventListener('scroll', () => {
-                    scrollTopBtn.classList.toggle('active', window.pageYOffset > 300);
-                });
-                
-                scrollTopBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            }
-            
-            // Animation on scroll - optimized for performance
-            function animateOnScroll() {
-                const elements = document.querySelectorAll('.animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-fade-in');
-                
-                // Use Intersection Observer for better performance
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.classList.add('animated');
-                            // Stop observing after animation is triggered
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    root: null,
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -100px 0px'
-                });
-                
-                elements.forEach(element => {
-                    element.style.opacity = '0';
-                    observer.observe(element);
-                });
-            }
-            
-            // Run animation on scroll with performance optimization
-            animateOnScroll();
-            
-            // Enhanced scroll animations for the sticky sidebar section
-            const stepItems = document.querySelectorAll('.step-item');
-            const scrollGifs = document.querySelectorAll('.scroll-gif');
-            const gifsArea = document.querySelector('.gifs-area');
-            
-            // Set up scroll animations with Intersection Observer for better performance
-            function setupScrollAnimations() {
-                // Make first step and gif active by default
-                if (stepItems.length > 0 && scrollGifs.length > 0) {
-                    stepItems[0].classList.add('active');
-                    scrollGifs[0].classList.add('active');
-                }
-                
-                // Check device type and adjust behavior
-                const isMobile = window.innerWidth < 768;
-                
-                if (isMobile) {
-                    // For mobile: Use Intersection Observer for each GIF
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const gif = entry.target;
-                                const index = Array.from(scrollGifs).indexOf(gif);
-                                
-                                // Update active classes
-                                scrollGifs.forEach(g => g.classList.remove('active'));
-                                stepItems.forEach(item => item.classList.remove('active'));
-                                
-                                gif.classList.add('active');
-                                if (stepItems[index]) {
-                                    stepItems[index].classList.add('active');
-                                }
-                            }
-                        });
-                    }, {
-                        threshold: 0.6, // Require 60% visibility
-                        rootMargin: '-10% 0px -10% 0px'
-                    });
-                    
-                    scrollGifs.forEach(gif => observer.observe(gif));
-                } else {
-                    // For desktop: Use scroll event for smoother transitions
-                    function handleScrollAnimations() {
-                        const scrollPosition = window.pageYOffset;
-                        const windowHeight = window.innerHeight;
-                        
-                        scrollGifs.forEach((gif, index) => {
-                            const rect = gif.getBoundingClientRect();
-                            const gifMiddle = rect.top + (rect.height / 2);
-                            
-                            // Check if gif is in center area of viewport
-                            if (gifMiddle > 0 && gifMiddle < windowHeight) {
-                                const distanceFromCenter = Math.abs((windowHeight / 2) - gifMiddle);
-                                const viewportCenter = windowHeight / 2;
-                                
-                                if (distanceFromCenter < viewportCenter * 0.5) {
-                                    // Update active classes
-                                    stepItems.forEach(item => item.classList.remove('active'));
-                                    scrollGifs.forEach(g => g.classList.remove('active'));
-                                    
-                                    stepItems[index].classList.add('active');
-                                    gif.classList.add('active');
-                                }
-                            }
-                        });
-                    }
-                    
-                    // Use passive event listener for better scroll performance
-                    window.addEventListener('scroll', handleScrollAnimations, { passive: true });
-                    window.addEventListener('resize', handleScrollAnimations, { passive: true });
-                    // Run once on load
-                    handleScrollAnimations();
-                }
-            }
-            
-            // Add responsive click functionality to step items
-            $('.step-item').on('click', function() {
-                const index = $(this).index();
-                const targetGif = $('.scroll-gif').eq(index);
-                
-                if (!targetGif.length) return;
-                
-                // Remove active classes
-                $('.step-item').removeClass('active');
-                $('.scroll-gif').removeClass('active');
-                
-                // Add active classes
-                $(this).addClass('active');
-                targetGif.addClass('active');
-                
-                // Scroll offset based on device
-                const offset = window.innerWidth < 768 ? 
-                    targetGif.outerHeight() * 0.2 : // Show 20% of gif height on mobile
-                    ($(window).height() / 2) - (targetGif.outerHeight() / 2); // Center on desktop
-                
-                // Smooth scroll to the corresponding GIF
-                $('html, body').animate({
-                    scrollTop: targetGif.offset().top - offset
-                }, 600);
-            });
-            
-            // Initialize the scroll animations
-            setupScrollAnimations();
-            
-            // Reinitialize on resize with debounce for performance
-            let resizeTimer;
-            $(window).on('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    setupScrollAnimations();
-                }, 250);
-            });
-        });
-    </script>
 </body>
 </html>

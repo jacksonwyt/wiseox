@@ -496,12 +496,8 @@ img {
 
 /* Scroll Animations Section */
 .scroll-animations-section {
-    padding: 80px 0 0;
-    background: none;
-    position: relative;
-    overflow: visible;
-    margin-top: 60px;
-    box-shadow: none;
+    padding: 80px 0;
+    overflow: hidden;
 }
 
 .scroll-section {
@@ -529,15 +525,15 @@ img {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
 .step-item {
-    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     opacity: 0.4;
     transition: opacity 0.3s ease;
-    cursor: pointer;
-    text-align: left;
 }
 
 .step-item.active {
@@ -545,54 +541,82 @@ img {
 }
 
 .step-number {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 700;
-    color: rgba(0, 0, 0, 0.1);
-    display: block;
-    line-height: 1;
-    margin-bottom: 5px;
-    transition: color 0.5s ease, text-shadow 0.5s ease;
-}
-
-.step-item.active .step-number {
     color: var(--primary-color);
-    text-shadow: 0 0 8px rgba(130, 106, 222, 0.3);
+    line-height: 1;
 }
 
 .step-title {
     font-size: 18px;
     font-weight: 500;
-    color: var(--secondary-color);
-    transition: color 0.3s ease;
+    color: var(--text-color);
 }
 
-/* Right side - GIFs area (scrollable) */
 .gifs-area {
-    position: relative;
-    padding: 40px;
-    background: none;
+    padding-top: 20px;
+    padding-bottom: 100px;
 }
 
-/* GIFs vertically stacked for scrolling */
 .scroll-gif {
-    display: block;
     width: 100%;
-    height: auto;
-    margin: 0 auto 100px;
-    object-fit: contain;
-    opacity: 1;
+    max-width: 500px;
+    margin: 0 auto 150px;
+    opacity: 0.3;
     transition: all 0.4s ease;
     background: none !important;
     box-shadow: none;
     border: none;
 }
 
-.scroll-gif:last-child {
-    margin-bottom: 100px;
+.scroll-gif.active {
+    opacity: 1;
 }
 
-.scroll-spacer {
-    height: 100px;
+/* Mobile Optimization for Scroll Animations */
+@media (max-width: 768px) {
+    .scroll-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .text-sidebar-wrapper {
+        position: sticky;
+        top: 70px;
+        height: auto;
+        min-height: 300px;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .text-sidebar {
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+        height: auto;
+    }
+
+    .step-number {
+        font-size: 32px;
+    }
+
+    .step-title {
+        font-size: 16px;
+    }
+
+    .gifs-area {
+        padding-top: 10px;
+        padding-bottom: 50px;
+    }
+
+    .scroll-gif {
+        margin: 0 auto 100px;
+        max-width: 100%;
+    }
+
+    .scroll-gif:last-child {
+        margin-bottom: 50px;
+    }
 }
 
 /* Section Heading Styles */
@@ -1123,5 +1147,224 @@ img {
     
     .step-number {
         font-size: 36px;
+    }
+}
+
+/* Case Studies Page Styles */
+.case-studies-section {
+    padding: 180px 0 80px;
+    background-color: var(--light-color);
+}
+
+.case-studies-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.case-study-item {
+    flex: 1;
+    max-width: 360px;
+    text-align: center;
+    padding: 20px;
+}
+
+.company-logo {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.company-logo img {
+    max-width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.case-study-content {
+    padding: 0 20px;
+}
+
+.case-study-logo {
+    flex: 0 0 300px;
+}
+
+.case-study-description {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: var(--text-color);
+}
+
+.case-study-result {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.metric-value {
+    color: var(--primary-color);
+}
+
+.case-study-result i {
+    margin-right: 12px;
+}
+
+.case-study-header .content {
+    flex: 1;
+}
+
+.case-study-header h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.case-study-category {
+    display: inline-block;
+    padding: 12px 12px;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.case-study-details p {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.case-study-link {
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.case-study-link:hover {
+    color: var(--secondary-color);
+}
+
+.other-partners-section {
+    margin-top: 80px;
+    text-align: center;
+}
+
+/* Typewriter effect styles */
+.typewriter-container {
+    display: inline-block;
+    position: relative;
+}
+
+.typewriter-container::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: var(--primary-color);
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Media Queries for Case Studies */
+@media (max-width: 1024px) {
+    .case-studies-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .case-study-item {
+        max-width: 500px;
+        width: 100%;
+        margin-bottom: 60px;
+    }
+
+    .case-study-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .company-logo {
+        height: 120px;
+    }
+
+    .case-study-description {
+        font-size: 16px;
+    }
+
+    .case-study-result {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .case-studies-section {
+        padding: 100px 0 60px;
+    }
+    
+    .case-studies-list {
+        grid-template-columns: 1fr;
+    }
+
+    .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 20px;
+    }
+
+    /* Mobile menu for case studies page */
+    .nav-menu {
+        display: flex;
+        gap: 30px;
+    }
+    
+    .nav-menu a {
+        font-weight: 500;
+        color: var(--secondary-color);
+        transition: color 0.3s ease;
+    }
+    
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        color: var(--primary-color);
+    }
+    
+    .mobile-menu-btn {
+        display: none;
+        cursor: pointer;
+        font-size: 24px;
+        color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+        .mobile-menu-btn {
+            display: block;
+        }
+        
+        .nav-menu {
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background-color: white;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+            transition: 0.3s ease;
+        }
+        
+        .nav-menu.active {
+            left: 0;
+        }
     }
 }

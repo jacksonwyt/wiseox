@@ -1,0 +1,13 @@
+{
+    "name": "wiseox-website",
+    "version": "1.0.0",
+    "description": "Wise Ox Media Website",
+    "main": "index.js",
+    "dependencies": {
+      "nodemailer": "^6.9.1"
+    },
+    "scripts": {
+      "dev": "vercel dev",
+      "deploy": "vercel --prod"
+    }
+  }
