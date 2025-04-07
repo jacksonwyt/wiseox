@@ -51,6 +51,11 @@
     
     <script>
         $(document).ready(function() {
+            // Hide preloader
+            window.addEventListener('load', () => {
+                document.querySelector('.preloader').style.display = 'none';
+            });
+            
             // Initialize Swiper for logo scroll
             new Swiper('.logo-swiper', {
                 slidesPerView: 'auto',
