@@ -588,11 +588,18 @@ img {
     .scroll-section {
         flex-direction: column;
         gap: 20px;
-        min-height: auto; /* Reset min-height for mobile */
+        min-height: auto;
     }
 
     .text-sidebar-wrapper {
-        display: none; /* Hide the sidebar on mobile */
+        position: static;
+        height: auto;
+        width: 100%;
+        display: block;
+    }
+
+    .text-sidebar {
+        display: none;
     }
 
     .gifs-area {
@@ -606,17 +613,16 @@ img {
     .scroll-gif {
         width: 100%;
         height: auto;
-        opacity: 1 !important; /* Force opacity to always be 1 on mobile */
+        opacity: 1 !important;
         margin-bottom: 10px;
         position: relative;
     }
 
-    .scroll-gif:after {
+    .scroll-gif::after {
         content: attr(data-step);
-        position: relative;
         display: block;
-        font-weight: 700;
-        font-size: 1.2rem; /* Slightly smaller font size for better mobile display */
+        font-size: 1.1rem;
+        font-weight: 500;
         color: var(--primary-color);
         margin-top: 15px;
         text-align: center;
@@ -934,13 +940,13 @@ img {
 /* Extra small devices (phones) */
 @media (max-width: 575.98px) {
     .header {
-        padding-top: 100px;  /* Increased padding to prevent navbar overlap */
+        padding-top: 100px;
         padding-bottom: 30px;
     }
     
     .header h1 {
         font-size: 32px;
-        margin-top: 20px;  /* Add space above the title */
+        margin-top: 20px;
     }
     
     .header p {
@@ -958,13 +964,13 @@ img {
     }
     
     .header-image {
-        display: block;  /* Show the main logo */
+        display: block;
         min-width: 100%;
         margin-bottom: 20px;
     }
     
     .header-image img {
-        max-width: 200px;  /* Control the logo size */
+        max-width: 200px;
         height: auto;
     }
 
@@ -1135,7 +1141,6 @@ img {
     }
     
     .client-logo:hover {
-        /* Allow logos to be colorful on mobile without hover */
         filter: grayscale(30%);
         opacity: 0.9;
     }
