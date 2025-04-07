@@ -51,7 +51,7 @@
                         scrollGifs.forEach(g => g.classList.remove('active'));
                         stepItems.forEach(item => item.classList.remove('active'));
                         
-                        // Add active class to current items
+                        // Add active class only to current item
                         gif.classList.add('active');
                         if (stepItems[index]) {
                             stepItems[index].classList.add('active');
@@ -79,9 +79,19 @@
             stepItems.forEach((item, index) => {
                 item.addEventListener('click', () => {
                     if (scrollGifs[index]) {
+                        // Smooth scroll to the corresponding GIF
                         scrollGifs[index].scrollIntoView({
                             behavior: 'smooth',
                             block: 'center'
+                        });
+                        
+                        // Apply active states immediately for better UX
+                        scrollGifs.forEach((gif, i) => {
+                            gif.classList.toggle('active', i === index);
+                        });
+                        
+                        stepItems.forEach((step, i) => {
+                            step.classList.toggle('active', i === index);
                         });
                     }
                 });
@@ -162,22 +172,6 @@
             }
         });
     });
-    
-    // Preloader effect
-    $(window).on('load', function() {
-        $('.preloader').addClass('fade-out');
-        setTimeout(function() {
-            $('.preloader').hide();
-        }, 500);
-    });
-    
-    // Fallback for preloader
-    setTimeout(function() {
-        $('.preloader').addClass('fade-out');
-        setTimeout(function() {
-            $('.preloader').hide();
-        }, 500);
-    }, 1500);
     
     // Trigger animation when element is in viewport
     function isInViewport(element) {
