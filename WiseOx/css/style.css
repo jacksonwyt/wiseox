@@ -1393,6 +1393,8 @@ img {
     }
 }
 
+/* Removing duplicate mobile-caption styles that override the media query version */
+/* 
 .mobile-caption {
     display: none;
     text-align: center;
@@ -1407,3 +1409,4 @@ img {
     font-weight: 700;
     margin-right: 5px;
 }
+*/
