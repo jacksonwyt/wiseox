@@ -588,63 +588,64 @@ img {
 /* Mobile Optimization for Scroll Animations - Updated */
 @media (max-width: 768px) {
     .scroll-section {
-        flex-direction: column;
-        gap: 40px;
+        flex-direction: row; /* Keep horizontal layout like desktop */
+        gap: 20px; /* Reduced gap for mobile */
     }
 
     .text-sidebar-wrapper {
-        position: sticky !important; /* Force sticky */
+        position: sticky !important;
         top: 80px !important; /* Adjust for navbar height */
-        width: 100% !important;
-        height: auto;
-        min-height: auto;
-        z-index: 10; /* Ensure sidebar appears above content */
-        background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+        width: 30% !important; /* Narrower sidebar on mobile */
+        height: 70vh; /* Limit height to avoid issues with very tall screens */
+        min-height: 300px; /* Minimum height */
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.95);
         padding: 10px 0;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 0;
         display: block !important;
-        overflow-y: visible;
-        -webkit-overflow-scrolling: touch;
+        align-self: flex-start;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visibility */
+    }
+
+    .scroll-animations-section {
+        padding: 80px 0; /* Reduce padding for mobile */
+        overflow: hidden; /* Prevent horizontal scrolling */
     }
 
     .text-sidebar {
         padding: 10px;
         display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        white-space: nowrap;
+        flex-direction: column; /* Vertical layout like desktop */
+        overflow-y: auto; /* Allow vertical scrolling */
+        overflow-x: hidden;
+        white-space: normal;
         gap: 15px;
         height: auto;
-        max-width: 100%;
+        max-height: 80vh; /* Limit height */
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 5px;
-        scroll-snap-type: x mandatory;
-        justify-content: flex-start;
-        align-items: center;
     }
 
     .step-item {
         flex: 0 0 auto;
-        min-width: 120px; /* Smaller fixed width to show more items */
-        margin-right: 10px;
+        min-width: auto; /* Allow natural width */
+        margin-right: 0;
+        margin-bottom: 10px;
         padding: 10px 15px;
         background-color: rgba(255, 255, 255, 0.8);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        scroll-snap-align: center;
         opacity: 0.7;
         transform: none;
         display: flex !important;
-        flex-direction: column;
+        flex-direction: row; /* Horizontal alignment of number and title */
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
     }
     
     .step-item.active {
         background-color: var(--primary-color);
         color: white;
         opacity: 1;
-        transform: none;
+        transform: translateX(5px); /* Add slight movement like desktop */
     }
     
     .step-item.active .step-number,
@@ -653,9 +654,13 @@ img {
     }
     
     .gifs-area {
-        width: 100%;
+        width: 70%; /* Take remaining width */
         padding: 0 15px;
         gap: 100px; /* Maintain gap between images */
+    }
+    
+    .step-number {
+        margin-right: 10px; /* Space between number and title */
     }
 }
 

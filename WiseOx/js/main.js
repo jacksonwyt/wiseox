@@ -37,15 +37,13 @@
             const isMobile = window.innerWidth <= 768;
             
             // Configure threshold based on device
-            const observerThreshold = isMobile ? 0.2 : 0.6;
-            const observerMargin = isMobile ? '0px 0px -25% 0px' : '-10% 0px -10% 0px';
+            const observerThreshold = isMobile ? 0.3 : 0.6;
+            const observerMargin = isMobile ? '-15% 0px -15% 0px' : '-10% 0px -10% 0px';
             
             // Make sure all step items are visible initially
-            if (isMobile) {
-                stepItems.forEach((item, index) => {
-                    item.style.display = 'flex';
-                });
-            }
+            stepItems.forEach((item, index) => {
+                item.style.display = 'flex';
+            });
 
             // Create new intersection observer
             window.scrollObserver = new IntersectionObserver((entries) => {
@@ -63,20 +61,12 @@
                         if (stepItems[index]) {
                             stepItems[index].classList.add('active');
                             
-                            // On mobile, scroll the step into view in the sidebar
+                            // On mobile but vertical layout, scroll the step into view vertically
                             if (isMobile && stepItems[index]) {
-                                // Center item in the horizontal scrolling sidebar
-                                const sidebar = document.querySelector('.text-sidebar');
-                                if (sidebar) {
-                                    const itemOffset = stepItems[index].offsetLeft;
-                                    const sidebarWidth = sidebar.offsetWidth;
-                                    const itemWidth = stepItems[index].offsetWidth;
-                                    
-                                    sidebar.scrollTo({
-                                        left: itemOffset - (sidebarWidth / 2) + (itemWidth / 2),
-                                        behavior: 'smooth'
-                                    });
-                                }
+                                stepItems[index].scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'nearest'
+                                });
                             }
                         }
                     }
