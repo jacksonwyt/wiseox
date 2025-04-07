@@ -509,11 +509,17 @@ img {
 }
 
 .text-sidebar-wrapper {
-    position: sticky;
-    top: 100px;
-    height: calc(100vh - 150px);
-    padding-right: 20px;
+    position: relative;
+    height: fit-content;
     z-index: 10;
+}
+
+.text-sidebar-wrapper.sticky-sidebar {
+    position: fixed;
+    top: 100px; /* Will be adjusted by JavaScript based on navbar height */
+    width: calc(50% - 45px); /* Half of container minus gap/2 */
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
 }
 
 .text-sidebar {
@@ -522,7 +528,6 @@ img {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     padding: 30px;
     height: 100%;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -581,8 +586,9 @@ img {
     }
 
     .text-sidebar-wrapper {
-        position: sticky;
-        top: 70px;
+        position: relative !important;
+        top: 0 !important;
+        width: 100% !important;
         height: auto;
         min-height: 300px;
         padding-right: 0;

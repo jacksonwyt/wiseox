@@ -23,35 +23,51 @@
             });
         }
 
-        // Scroll Animation Steps
-        function handleScrollAnimations() {
-            const scrollContainer = $('.scroll-container');
-            const steps = $('.step-item');
-            const animations = $('.scroll-gif');
-            const windowHeight = $(window).height();
-            const scrollTop = $(window).scrollTop();
+        // Initialize scroll animations with Waypoints
+        function setupScrollAnimations() {
+            const scrollGifs = $('.scroll-gif');
+            const stepItems = $('.step-item');
             
-            animations.each(function(index) {
-                const animation = $(this);
-                const animationTop = animation.offset().top;
-                const animationHeight = animation.outerHeight();
-                const animationCenter = animationTop + (animationHeight / 2);
+            scrollGifs.each(function(index) {
+                const gif = $(this);
+                const stepItem = stepItems.eq(index);
                 
-                // Check if animation is in viewport (centered in the middle of the viewport)
-                if (animationCenter > scrollTop && animationCenter < (scrollTop + windowHeight)) {
-                    // Update active step and animation
-                    steps.removeClass('active');
-                    animations.removeClass('active');
-                    
-                    steps.eq(index).addClass('active');
-                    animation.addClass('active');
-                }
+                new Waypoint({
+                    element: gif[0],
+                    handler: function(direction) {
+                        // Remove active class from all items
+                        scrollGifs.removeClass('active');
+                        stepItems.removeClass('active');
+                        
+                        // Add active class to current items
+                        gif.addClass('active');
+                        stepItem.addClass('active');
+                    },
+                    offset: '60%' // Trigger when element is 60% from the top of the viewport
+                });
             });
+            
+            // Make the sidebar sticky using Waypoints Sticky
+            const sidebar = $('.text-sidebar-wrapper')[0];
+            if (sidebar) {
+                const stickyOffset = $('.navbar').outerHeight() + 20; // Navbar height plus some padding
+                
+                new Waypoint.Sticky({
+                    element: sidebar,
+                    offset: stickyOffset,
+                    stuckClass: 'sticky-sidebar'
+                });
+            }
         }
+
+        // Initialize scroll animations
+        setupScrollAnimations();
         
-        // Run scroll animation on page load and on scroll
-        $(window).on('load scroll', function() {
-            handleScrollAnimations();
+        // Reinitialize on resize with debounce
+        let resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(setupScrollAnimations, 250);
         });
 
         // Mobile menu functionality
