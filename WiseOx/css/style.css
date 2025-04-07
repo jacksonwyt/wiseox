@@ -1020,30 +1020,44 @@ img {
     
     /* Mobile navigation improvements */
     .mobile-menu-btn {
+        display: none;
+    }
+    
+    .sticky-plus-btn {
         display: block;
     }
     
     .nav-menu {
         position: fixed;
-        top: 74px;
-        left: -100%;
-        width: 80%;
-        height: calc(100vh - 74px);
+        top: auto;
+        bottom: 80px;
+        left: auto;
+        right: 20px;
+        width: auto;
+        height: auto;
         flex-direction: column;
         background-color: white;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
-        padding: 20px;
+        padding: 15px;
         z-index: 1000;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
     }
     
     .nav-menu.active {
-        left: 0;
+        left: auto;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
     }
     
     .nav-menu li {
-        margin: 15px 0;
+        margin: 10px 0;
         width: 100%;
+        text-align: center;
     }
 }
 
@@ -1060,25 +1074,38 @@ img {
     }
     
     .mobile-menu-btn {
+        display: none;
+    }
+    
+    .sticky-plus-btn {
         display: block;
     }
     
     .nav-menu {
         position: fixed;
-        top: 74px;
-        left: -100%;
-        width: 70%;
-        height: calc(100vh - 74px);
+        top: auto;
+        bottom: 80px;
+        left: auto;
+        right: 20px;
+        width: auto;
+        height: auto;
         flex-direction: column;
         background-color: white;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
-        padding: 25px;
+        padding: 15px;
         z-index: 1000;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
     }
     
     .nav-menu.active {
-        left: 0;
+        left: auto;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
     }
     
     .nav-menu li {
@@ -1364,49 +1391,158 @@ img {
     
     .mobile-menu-btn {
         display: none;
-        cursor: pointer;
-        font-size: 24px;
-        color: var(--secondary-color);
     }
     
-    @media (max-width: 768px) {
-        .mobile-menu-btn {
-            display: block;
-        }
-        
-        .nav-menu {
-            position: fixed;
-            top: 80px;
-            left: -100%;
-            width: 100%;
-            height: calc(100vh - 80px);
-            background-color: white;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 0;
-            transition: 0.3s ease;
-        }
-        
-        .nav-menu.active {
-            left: 0;
-        }
+    .sticky-plus-btn {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: auto;
+        bottom: 80px;
+        left: auto;
+        right: 20px;
+        width: auto;
+        height: auto;
+        background-color: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+    }
+    
+    .nav-menu.active {
+        left: auto;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
+    }
+    
+    .nav-menu li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
     }
 }
 
-/* Removing duplicate mobile-caption styles that override the media query version */
-/* 
-.mobile-caption {
+/* Sticky Plus Button for Mobile Navigation */
+.sticky-plus-btn {
     display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 1001;
     text-align: center;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--primary-color);
+    font-size: 24px;
+    line-height: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.mobile-caption .step-number {
-    font-weight: 700;
-    margin-right: 5px;
+.sticky-plus-btn:hover, .sticky-plus-btn.active {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
 }
-*/
+
+@media (max-width: 575.98px) {
+    // ... existing code ...
+    
+    /* Mobile navigation improvements */
+    .mobile-menu-btn {
+        display: none; /* Hide the hamburger icon */
+    }
+    
+    .sticky-plus-btn {
+        display: block; /* Show the sticky plus button on mobile */
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: auto;
+        bottom: 80px;
+        left: auto;
+        right: 20px;
+        width: auto;
+        height: auto;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        padding: 15px;
+        z-index: 1000;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+    }
+    
+    .nav-menu.active {
+        left: auto;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
+    }
+    
+    .nav-menu li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Small devices (landscape phones) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    // ... existing code ...
+    
+    .mobile-menu-btn {
+        display: none; /* Hide the hamburger icon */
+    }
+    
+    .sticky-plus-btn {
+        display: block; /* Show the sticky plus button */
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: auto;
+        bottom: 80px;
+        left: auto;
+        right: 20px;
+        width: auto;
+        height: auto;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        padding: 15px;
+        z-index: 1000;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+    }
+    
+    .nav-menu.active {
+        left: auto;
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: all;
+    }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    // ... existing code ...
+}

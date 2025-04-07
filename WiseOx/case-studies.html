@@ -82,6 +82,10 @@
         </div>
     </nav>
 
+    <!-- Sticky Plus Button for Mobile Navigation -->
+    <div class="sticky-plus-btn" aria-label="Toggle navigation">
+        <i class="fas fa-plus"></i>
+    </div>
 
     <!-- Case Studies Section -->
     <section class="case-studies-section">
@@ -232,11 +236,25 @@
             $(this).toggleClass('active');
         });
         
+        // Sticky plus button for mobile navigation
+        $('.sticky-plus-btn').on('click', function() {
+            $('.nav-menu').toggleClass('active');
+            $(this).toggleClass('active');
+            
+            // Change icon between plus and times
+            if ($('.nav-menu').hasClass('active')) {
+                $(this).html('<i class="fas fa-times"></i>');
+            } else {
+                $(this).html('<i class="fas fa-plus"></i>');
+            }
+        });
+        
         // Close menu when clicking outside
         $(document).on('click', function(event) {
-            if (!$(event.target).closest('.mobile-menu-btn, .nav-menu').length) {
+            if (!$(event.target).closest('.mobile-menu-btn, .sticky-plus-btn, .nav-menu').length) {
                 $('.nav-menu').removeClass('active');
                 $('.mobile-menu-btn').removeClass('active');
+                $('.sticky-plus-btn').removeClass('active').html('<i class="fas fa-plus"></i>');
             }
         });
         
@@ -244,6 +262,7 @@
         $('.nav-menu a').click(function() {
             $('.nav-menu').removeClass('active');
             $('.mobile-menu-btn').removeClass('active');
+            $('.sticky-plus-btn').removeClass('active').html('<i class="fas fa-plus"></i>');
         });
 
         // Initialize animations

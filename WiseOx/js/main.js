@@ -141,11 +141,26 @@
             }
         });
         
+        // Sticky plus button for mobile navigation
+        $('.sticky-plus-btn').on('click', function(e) {
+            e.stopPropagation();
+            $('.nav-menu').toggleClass('active');
+            $(this).toggleClass('active');
+            
+            // Change icon between plus and times
+            if ($('.nav-menu').hasClass('active')) {
+                $(this).html('<i class="fas fa-times"></i>');
+            } else {
+                $(this).html('<i class="fas fa-plus"></i>');
+            }
+        });
+        
         // Close mobile menu when clicking anywhere else on the page
         $(document).on('click', function(e) {
-            if (!$(e.target).closest('.nav-menu, .mobile-menu-btn').length) {
+            if (!$(e.target).closest('.nav-menu, .mobile-menu-btn, .sticky-plus-btn').length) {
                 $('.nav-menu').removeClass('active');
                 $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
+                $('.sticky-plus-btn').removeClass('active').html('<i class="fas fa-plus"></i>');
             }
         });
         
@@ -158,6 +173,7 @@
         $('.nav-menu a').on('click', function() {
             $('.nav-menu').removeClass('active');
             $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
+            $('.sticky-plus-btn').removeClass('active').html('<i class="fas fa-plus"></i>');
         });
         
         // Reinitialize on resize with debounce
@@ -180,6 +196,7 @@
                 if (window.innerWidth > 768) {
                     $('.nav-menu').removeClass('active');
                     $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
+                    $('.sticky-plus-btn').removeClass('active').html('<i class="fas fa-plus"></i>');
                 }
             }, 250);
         });
