@@ -498,22 +498,25 @@ img {
 .scroll-animations-section {
     padding: 100px 0;
     background-color: #f9f9f9;
+    overflow-x: hidden;
 }
 
 .scroll-section {
     display: flex;
     gap: 40px;
     position: relative;
+    max-width: 100%;
 }
 
 .text-sidebar-wrapper {
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: 80px;
+    height: 80vh;
     width: 40%;
     align-self: flex-start;
     display: flex;
     align-items: center;
+    z-index: 10;
 }
 
 .text-sidebar {
@@ -571,7 +574,7 @@ img {
     width: 60%;
     display: flex;
     flex-direction: column;
-    gap: 100px; /* This controls the scroll distance between animations */
+    gap: 100px;
 }
 
 .scroll-gif {
@@ -588,79 +591,81 @@ img {
 /* Mobile Optimization for Scroll Animations - Updated */
 @media (max-width: 768px) {
     .scroll-section {
-        flex-direction: row; /* Keep horizontal layout like desktop */
-        gap: 20px; /* Reduced gap for mobile */
+        flex-direction: row; /* Same as desktop */
+        gap: 40px; /* Same gap as desktop */
     }
 
     .text-sidebar-wrapper {
-        position: sticky !important;
+        position: sticky;
         top: 80px !important; /* Adjust for navbar height */
-        width: 30% !important; /* Narrower sidebar on mobile */
-        height: 70vh; /* Limit height to avoid issues with very tall screens */
-        min-height: 300px; /* Minimum height */
-        z-index: 10;
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 10px 0;
-        margin-bottom: 0;
-        display: block !important;
+        width: 40%; /* Same proportion as desktop */
+        height: 80vh; /* Similar height as desktop but adjusted for mobile */
+        min-height: 300px; /* Ensures minimum height on small screens */
         align-self: flex-start;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visibility */
-    }
-
-    .scroll-animations-section {
-        padding: 80px 0; /* Reduce padding for mobile */
-        overflow: hidden; /* Prevent horizontal scrolling */
+        z-index: 10;
     }
 
     .text-sidebar {
-        padding: 10px;
         display: flex;
-        flex-direction: column; /* Vertical layout like desktop */
-        overflow-y: auto; /* Allow vertical scrolling */
-        overflow-x: hidden;
-        white-space: normal;
-        gap: 15px;
+        flex-direction: column; /* Same as desktop */
+        gap: 20px; /* Slightly reduced from desktop for better fit */
         height: auto;
-        max-height: 80vh; /* Limit height */
-        -webkit-overflow-scrolling: touch;
+        padding: 10px;
+        overflow-y: auto;
     }
 
     .step-item {
-        flex: 0 0 auto;
-        min-width: auto; /* Allow natural width */
-        margin-right: 0;
-        margin-bottom: 10px;
-        padding: 10px 15px;
-        background-color: rgba(255, 255, 255, 0.8);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        opacity: 0.7;
-        transform: none;
-        display: flex !important;
-        flex-direction: row; /* Horizontal alignment of number and title */
+        display: flex;
         align-items: center;
-        justify-content: flex-start;
+        gap: 10px; /* Slightly reduced from desktop */
+        opacity: 0.5;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        padding: 8px 10px; /* Slightly smaller padding */
+        border-radius: 8px;
+        background-color: transparent;
     }
     
     .step-item.active {
-        background-color: var(--primary-color);
-        color: white;
         opacity: 1;
-        transform: translateX(5px); /* Add slight movement like desktop */
-    }
-    
-    .step-item.active .step-number,
-    .step-item.active .step-title {
-        color: white;
-    }
-    
-    .gifs-area {
-        width: 70%; /* Take remaining width */
-        padding: 0 15px;
-        gap: 100px; /* Maintain gap between images */
+        background-color: rgba(var(--primary-color-rgb, 0, 123, 255), 0.1);
+        transform: translateX(5px); /* Same as desktop */
     }
     
     .step-number {
-        margin-right: 10px; /* Space between number and title */
+        font-weight: 700;
+        font-size: 1.2rem; /* Slightly smaller than desktop */
+        color: #333;
+        transition: color 0.3s ease;
+    }
+    
+    .step-item.active .step-number {
+        color: var(--primary-color);
+    }
+    
+    .step-title {
+        font-size: 1rem; /* Slightly smaller than desktop */
+        font-weight: 500;
+    }
+    
+    .gifs-area {
+        width: 60%; /* Same proportion as desktop */
+        display: flex;
+        flex-direction: column;
+        gap: 100px; /* Same as desktop */
+        padding: 0 10px;
+    }
+    
+    .scroll-gif {
+        width: 100%;
+        height: auto;
+        opacity: 0.3;
+        transition: opacity 0.3s ease;
+    }
+    
+    .scroll-gif.active {
+        opacity: 1;
     }
 }
 

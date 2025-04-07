@@ -33,12 +33,9 @@
                 window.scrollObserver.disconnect();
             }
 
-            // Determine if we're on mobile
-            const isMobile = window.innerWidth <= 768;
-            
-            // Configure threshold based on device
-            const observerThreshold = isMobile ? 0.3 : 0.6;
-            const observerMargin = isMobile ? '-15% 0px -15% 0px' : '-10% 0px -10% 0px';
+            // Use same configuration regardless of device
+            const observerThreshold = 0.6;
+            const observerMargin = '-10% 0px -10% 0px';
             
             // Make sure all step items are visible initially
             stepItems.forEach((item, index) => {
@@ -60,14 +57,6 @@
                         gif.classList.add('active');
                         if (stepItems[index]) {
                             stepItems[index].classList.add('active');
-                            
-                            // On mobile but vertical layout, scroll the step into view vertically
-                            if (isMobile && stepItems[index]) {
-                                stepItems[index].scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'nearest'
-                                });
-                            }
                         }
                     }
                 });
@@ -105,14 +94,8 @@
                 });
             });
             
-            // If on deployment, force reflow to ensure styles are applied
+            // Force reflow to ensure styles are applied
             setTimeout(() => {
-                const sidebarWrapper = document.querySelector('.text-sidebar-wrapper');
-                if (sidebarWrapper) {
-                    sidebarWrapper.style.display = 'block';
-                    sidebarWrapper.offsetHeight; // Force reflow
-                }
-                
                 // Activate first item by default
                 if (scrollGifs[0] && stepItems[0]) {
                     scrollGifs[0].classList.add('active');
