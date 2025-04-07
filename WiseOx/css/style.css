@@ -498,7 +498,7 @@ img {
 .scroll-animations-section {
     padding: 100px 0;
     background-color: #f9f9f9;
-    overflow-x: hidden;
+    overflow: visible;
 }
 
 .scroll-section {
@@ -506,16 +506,18 @@ img {
     gap: 40px;
     position: relative;
     max-width: 100%;
+    min-height: 800px;
+    margin-top: 40px;
 }
 
 .text-sidebar-wrapper {
+    position: -webkit-sticky;
     position: sticky;
-    top: 80px;
-    height: 80vh;
+    top: 120px;
+    transform: none;
+    height: calc(100vh - 160px);
     width: 40%;
     align-self: flex-start;
-    display: flex;
-    align-items: center;
     z-index: 10;
 }
 
@@ -524,6 +526,8 @@ img {
     flex-direction: column;
     gap: 30px;
     width: 100%;
+    height: 100%;
+    padding: 20px 0;
 }
 
 .step-item {
@@ -533,15 +537,14 @@ img {
     opacity: 0.5;
     transition: all 0.3s ease;
     cursor: pointer;
-    position: relative;
-    padding: 10px 15px;
+    padding: 10px;
     border-radius: 8px;
     background-color: transparent;
 }
 
 .step-item.active {
     opacity: 1;
-    background-color: rgba(var(--primary-color-rgb, 0, 123, 255), 0.1);
+    background-color: rgba(130, 106, 222, 0.1);
     transform: translateX(5px);
 }
 
@@ -557,17 +560,8 @@ img {
 }
 
 .step-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
-}
-
-/* Remove all line-related styles */
-.text-sidebar::before {
-    display: none;
-}
-
-.step-item::before {
-    display: none;
 }
 
 .gifs-area {
@@ -575,6 +569,7 @@ img {
     display: flex;
     flex-direction: column;
     gap: 100px;
+    padding: 20px 0;
 }
 
 .scroll-gif {
@@ -591,125 +586,40 @@ img {
 /* Mobile Optimization for Scroll Animations - Updated */
 @media (max-width: 768px) {
     .scroll-section {
-        flex-direction: row; /* Same as desktop */
-        gap: 40px; /* Same gap as desktop */
+        flex-direction: column;
+        gap: 20px;
+        min-height: auto; /* Reset min-height for mobile */
     }
 
     .text-sidebar-wrapper {
-        position: sticky;
-        top: 80px !important; /* Adjust for navbar height */
-        width: 40%; /* Same proportion as desktop */
-        height: 80vh; /* Similar height as desktop but adjusted for mobile */
-        min-height: 300px; /* Ensures minimum height on small screens */
-        align-self: flex-start;
-        z-index: 10;
+        display: none; /* Hide the sidebar on mobile */
     }
 
-    .text-sidebar {
-        display: flex;
-        flex-direction: column; /* Same as desktop */
-        gap: 20px; /* Slightly reduced from desktop for better fit */
-        height: auto;
-        padding: 10px;
-        overflow-y: auto;
-    }
-
-    .step-item {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Slightly reduced from desktop */
-        opacity: 0.5;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        position: relative;
-        padding: 8px 10px; /* Slightly smaller padding */
-        border-radius: 8px;
-        background-color: transparent;
-    }
-    
-    .step-item.active {
-        opacity: 1;
-        background-color: rgba(var(--primary-color-rgb, 0, 123, 255), 0.1);
-        transform: translateX(5px); /* Same as desktop */
-    }
-    
-    .step-number {
-        font-weight: 700;
-        font-size: 1.2rem; /* Slightly smaller than desktop */
-        color: #333;
-        transition: color 0.3s ease;
-    }
-    
-    .step-item.active .step-number {
-        color: var(--primary-color);
-    }
-    
-    .step-title {
-        font-size: 1rem; /* Slightly smaller than desktop */
-        font-weight: 500;
-    }
-    
     .gifs-area {
-        width: 60%; /* Same proportion as desktop */
+        width: 100%;
+        order: 1;
         display: flex;
         flex-direction: column;
-        gap: 100px; /* Same as desktop */
-        padding: 0 10px;
+        gap: 50px;
     }
-    
+
     .scroll-gif {
         width: 100%;
         height: auto;
-        opacity: 0.3;
-        transition: opacity 0.3s ease;
+        opacity: 1 !important; /* Force opacity to always be 1 on mobile */
+        margin-bottom: 10px;
+        position: relative;
     }
-    
-    .scroll-gif.active {
-        opacity: 1;
-    }
-}
 
-/* Fix mobile navbar - Update this section */
-@media (max-width: 768px) {
-    .mobile-menu-btn {
-        display: block !important;
-        cursor: pointer;
-        z-index: 1001;
-        padding: 10px;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 74px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 74px);
-        flex-direction: column;
-        background-color: white;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: left 0.3s ease;
-        padding: 30px 0;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-menu li {
-        margin: 15px 0;
-        width: 100%;
-        text-align: center;
-    }
-    
-    .nav-menu a {
+    .scroll-gif:after {
+        content: attr(data-step);
+        position: relative;
         display: block;
-        padding: 10px 0;
-        width: 100%;
-        font-size: 18px;
+        font-weight: 700;
+        font-size: 1.2rem; /* Slightly smaller font size for better mobile display */
+        color: var(--primary-color);
+        margin-top: 15px;
+        text-align: center;
     }
 }
 
@@ -1166,9 +1076,11 @@ img {
     }
     
     .text-sidebar-wrapper {
+        position: -webkit-sticky;
         position: sticky;
-        top: 0;
-        height: 100vh;
+        top: 120px;
+        transform: none;
+        height: calc(100vh - 160px);
         display: flex;
         align-items: center;
     }
@@ -1199,9 +1111,11 @@ img {
 /* Large devices (desktops) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .text-sidebar-wrapper {
+        position: -webkit-sticky;
         position: sticky;
-        top: 0;
-        height: 100vh;
+        top: 120px;
+        transform: none;
+        height: calc(100vh - 160px);
         display: flex;
         align-items: center;
     }

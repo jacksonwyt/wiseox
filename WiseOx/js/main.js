@@ -23,6 +23,24 @@
             });
         }
 
+        // Ensure sticky sidebar works properly
+        function setupStickySidebar() {
+            const sidebar = document.querySelector('.text-sidebar-wrapper');
+            const scrollSection = document.querySelector('.scroll-section');
+            
+            if (!sidebar || !scrollSection) return;
+            
+            // Ensure the scroll section has enough height for scrolling
+            const gifsArea = document.querySelector('.gifs-area');
+            if (gifsArea) {
+                const gifsHeight = gifsArea.offsetHeight;
+                scrollSection.style.minHeight = `${gifsHeight}px`;
+            }
+        }
+        
+        // Initialize sticky sidebar
+        setupStickySidebar();
+
         // Initialize scroll animations
         function setupScrollAnimations() {
             const scrollGifs = document.querySelectorAll('.scroll-gif');
@@ -33,75 +51,67 @@
                 window.scrollObserver.disconnect();
             }
 
-            // Use same configuration regardless of device
-            const observerThreshold = 0.6;
-            const observerMargin = '-10% 0px -10% 0px';
+            // Improved threshold for better activation timing
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -20% 0px', // Adjusted margin for better trigger points
+                threshold: [0, 0.25, 0.5, 0.75, 1] // More threshold points for smoother transitions
+            };
             
-            // Make sure all step items are visible initially
-            stepItems.forEach((item, index) => {
-                item.style.display = 'flex';
-            });
+            // Make sure all items are visible
+            stepItems.forEach(item => item.style.display = 'flex');
+            scrollGifs.forEach(gif => gif.style.display = 'block');
 
-            // Create new intersection observer
+            // Create intersection observer
             window.scrollObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const gif = entry.target;
-                        const index = Array.from(scrollGifs).indexOf(gif);
-                        
-                        // Remove active class from all items
+                    const gif = entry.target;
+                    const index = Array.from(scrollGifs).indexOf(gif);
+                    
+                    // Calculate visibility ratio
+                    const ratio = entry.intersectionRatio;
+                    
+                    // Only activate if the element is more than 50% visible
+                    if (ratio > 0.5 && entry.isIntersecting) {
+                        // Deactivate all items first
                         scrollGifs.forEach(g => g.classList.remove('active'));
-                        stepItems.forEach(item => item.classList.remove('active'));
+                        stepItems.forEach(step => step.classList.remove('active'));
                         
-                        // Add active class only to current item
+                        // Activate current items
                         gif.classList.add('active');
                         if (stepItems[index]) {
                             stepItems[index].classList.add('active');
                         }
                     }
                 });
-            }, {
-                threshold: observerThreshold,
-                rootMargin: observerMargin
-            });
-            
+            }, observerOptions);
+
             // Observe all GIFs
             scrollGifs.forEach(gif => window.scrollObserver.observe(gif));
-            
-            // Add click/touch events to step items
+
+            // Add click handlers for step items
             stepItems.forEach((item, index) => {
-                // Remove any existing event listeners
-                const newItem = item.cloneNode(true);
-                item.parentNode.replaceChild(newItem, item);
-                
-                newItem.addEventListener('click', () => {
-                    if (scrollGifs[index]) {
-                        // Smooth scroll to the corresponding GIF
-                        scrollGifs[index].scrollIntoView({
+                item.addEventListener('click', () => {
+                    const targetGif = scrollGifs[index];
+                    if (targetGif) {
+                        targetGif.scrollIntoView({ 
                             behavior: 'smooth',
                             block: 'center'
-                        });
-                        
-                        // Apply active states immediately for better UX
-                        scrollGifs.forEach((gif, i) => {
-                            gif.classList.toggle('active', i === index);
-                        });
-                        
-                        stepItems.forEach((step, i) => {
-                            step.classList.toggle('active', i === index);
                         });
                     }
                 });
             });
             
-            // Force reflow to ensure styles are applied
+            // Activate first items by default after a short delay
             setTimeout(() => {
-                // Activate first item by default
                 if (scrollGifs[0] && stepItems[0]) {
                     scrollGifs[0].classList.add('active');
                     stepItems[0].classList.add('active');
                 }
-            }, 500);
+                
+                // Force a scroll event to check initial positions
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
         }
 
         // Initialize scroll animations
@@ -145,6 +155,7 @@
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
                 setupScrollAnimations();
+                setupStickySidebar(); // Re-setup sticky sidebar on resize
                 
                 // Reset mobile menu state on resize
                 if ($(window).width() > 768) {
