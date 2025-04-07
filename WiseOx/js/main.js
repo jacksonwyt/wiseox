@@ -23,7 +23,7 @@
             });
         }
 
-        // Initialize scroll animations with Waypoints
+        // Initialize scroll animations
         function setupScrollAnimations() {
             const scrollGifs = document.querySelectorAll('.scroll-gif');
             const stepItems = document.querySelectorAll('.step-item');
@@ -57,12 +57,19 @@
                             stepItems[index].classList.add('active');
                             
                             // On mobile, scroll the step into view in the sidebar
-                            if (isMobile && stepItems[index].scrollIntoView) {
-                                stepItems[index].scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'nearest',
-                                    inline: 'center'
-                                });
+                            if (isMobile && stepItems[index]) {
+                                // Center item in the horizontal scrolling sidebar
+                                const sidebar = document.querySelector('.text-sidebar');
+                                if (sidebar) {
+                                    const itemOffset = stepItems[index].offsetLeft;
+                                    const sidebarWidth = sidebar.offsetWidth;
+                                    const itemWidth = stepItems[index].offsetWidth;
+                                    
+                                    sidebar.scrollTo({
+                                        left: itemOffset - (sidebarWidth / 2) + (itemWidth / 2),
+                                        behavior: 'smooth'
+                                    });
+                                }
                             }
                         }
                     }
@@ -77,7 +84,11 @@
             
             // Add click/touch events to step items
             stepItems.forEach((item, index) => {
-                item.addEventListener('click', () => {
+                // Remove any existing event listeners
+                const newItem = item.cloneNode(true);
+                item.parentNode.replaceChild(newItem, item);
+                
+                newItem.addEventListener('click', () => {
                     if (scrollGifs[index]) {
                         // Smooth scroll to the corresponding GIF
                         scrollGifs[index].scrollIntoView({
@@ -101,75 +112,51 @@
         // Initialize scroll animations
         setupScrollAnimations();
         
+        // Fix for the mobile navbar
+        $('.mobile-menu-btn').on('click', function(e) {
+            e.stopPropagation();
+            $('.nav-menu').toggleClass('active');
+            
+            // Change icon between bars and X
+            if ($('.nav-menu').hasClass('active')) {
+                $(this).html('<i class="fas fa-times"></i>');
+            } else {
+                $(this).html('<i class="fas fa-bars"></i>');
+            }
+        });
+        
+        // Close mobile menu when clicking anywhere else on the page
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.nav-menu, .mobile-menu-btn').length) {
+                $('.nav-menu').removeClass('active');
+                $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
+            }
+        });
+        
+        // Prevent menu from closing when clicking inside it
+        $('.nav-menu').on('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Close menu when clicking on a nav link (for single page sites)
+        $('.nav-menu a').on('click', function() {
+            $('.nav-menu').removeClass('active');
+            $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
+        });
+        
         // Reinitialize on resize with debounce
         let resizeTimer;
-        window.addEventListener('resize', function() {
+        $(window).on('resize', function() {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(setupScrollAnimations, 250);
-        });
-
-        // Mobile menu functionality
-        $('.mobile-menu-btn').on('click', function() {
-            $(this).toggleClass('active');
-            $('.nav-menu').toggleClass('active');
-        });
-        
-        // Close mobile menu when clicking outside
-        $(document).on('click', function(event) {
-            if (!$(event.target).closest('.mobile-menu-btn, .nav-menu').length) {
-                $('.nav-menu').removeClass('active');
-                $('.mobile-menu-btn').removeClass('active');
-            }
-        });
-        
-        // Sticky header effect
-        $(window).on('scroll', function() {
-            if ($(window).scrollTop() > 100) {
-                $('.navbar').addClass('sticky');
-            } else {
-                $('.navbar').removeClass('sticky');
-            }
-        });
-        
-        // Form validation for contact form
-        $('#contact-form').on('submit', function(e) {
-            e.preventDefault();
-            
-            let isValid = true;
-            const nameField = $('#name');
-            const emailField = $('#email');
-            const messageField = $('#message');
-            
-            // Reset errors
-            $('.form-control').removeClass('error');
-            
-            // Validate name
-            if (nameField.val().trim() === '') {
-                nameField.addClass('error');
-                isValid = false;
-            }
-            
-            // Validate email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailField.val())) {
-                emailField.addClass('error');
-                isValid = false;
-            }
-            
-            // Validate message
-            if (messageField.val().trim() === '') {
-                messageField.addClass('error');
-                isValid = false;
-            }
-            
-            // Submit if valid
-            if (isValid) {
-                // Here would be the AJAX call to submit the form
-                $('.form-message').html('<div class="success-message">Thank you! Your message has been sent.</div>');
-                this.reset();
-            } else {
-                $('.form-message').html('<div class="error-message">Please complete all required fields correctly.</div>');
-            }
+            resizeTimer = setTimeout(function() {
+                setupScrollAnimations();
+                
+                // Reset mobile menu state on resize
+                if ($(window).width() > 768) {
+                    $('.nav-menu').removeClass('active');
+                    $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
+                }
+            }, 250);
         });
     });
     

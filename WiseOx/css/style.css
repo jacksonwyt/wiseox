@@ -585,116 +585,138 @@ img {
     opacity: 1;
 }
 
-/* Mobile Optimization for Scroll Animations */
+/* Mobile Optimization for Scroll Animations - Updated */
 @media (max-width: 768px) {
     .scroll-section {
         flex-direction: column;
-        gap: 20px;
+        gap: 40px;
     }
 
     .text-sidebar-wrapper {
-        position: relative !important;
-        top: 0 !important;
+        position: sticky !important; /* Force sticky */
+        top: 80px !important; /* Adjust for navbar height */
         width: 100% !important;
         height: auto;
-        min-height: 200px;
-        padding-right: 0;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        min-height: auto;
+        z-index: 10; /* Ensure sidebar appears above content */
+        background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+        padding: 10px 0;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .text-sidebar {
-        padding: 20px;
-        flex-direction: column;
-        gap: 20px;
+        padding: 10px;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 15px;
         height: auto;
-        max-width: 320px;
+        max-width: 100%;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+        scroll-snap-type: x mandatory;
+        justify-content: flex-start;
+        align-items: center;
     }
 
     .step-item {
+        flex: 0 0 auto;
+        min-width: 160px; /* Fixed width for items */
+        margin-right: 10px;
+        padding: 10px 15px;
         background-color: rgba(255, 255, 255, 0.8);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        scroll-snap-align: center;
+        opacity: 0.7;
+        transform: none;
     }
     
     .step-item.active {
         background-color: var(--primary-color);
         color: white;
-        transform: translateX(0);
+        opacity: 1;
+        transform: none;
     }
     
     .step-item.active .step-number,
     .step-item.active .step-title {
         color: white;
     }
+    
+    .gifs-area {
+        width: 100%;
+        padding: 0 15px;
+        gap: 100px; /* Maintain gap between images */
+    }
+    
+    /* Remove duplicate media query for very small screens */
+}
 
-    /* For very small screens */
-    @media (max-width: 380px) {
-        .text-sidebar {
-            flex-direction: row;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 15px;
-            scroll-snap-type: x mandatory;
-        }
-        
-        .step-item {
-            flex: 0 0 auto;
-            width: 85%;
-            scroll-snap-align: center;
-            margin-right: 10px;
-        }
-        
-        .step-item::after {
-            display: none;
-        }
-        
-        .step-item.active {
-            background-color: var(--primary-color);
-            transform: scale(1.05);
-        }
+/* Fix mobile navbar - Update this section */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block !important;
+        cursor: pointer;
+        z-index: 1001;
+        padding: 10px;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 74px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 74px);
+        flex-direction: column;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+        padding: 30px 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 15px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 10px 0;
+        width: 100%;
+        font-size: 18px;
     }
 }
 
-/* Mobile-specific styling for step indicators */
+/* Remove duplicate media queries that might be causing conflicts */
 @media (max-width: 768px) {
     .text-sidebar {
-        padding: 15px;
+        padding: 10px;
         height: auto;
         max-height: none;
-        overflow: visible;
+        overflow-x: auto;
         width: 100%;
     }
     
     .text-sidebar-wrapper {
-        position: relative;
+        position: sticky !important;
+        top: 80px !important;
         height: auto;
         min-height: auto;
         max-height: none;
-        padding: 20px 0;
-        margin-bottom: 20px;
+        padding: 0;
+        margin-bottom: 0;
         overflow-y: visible;
         -webkit-overflow-scrolling: touch;
-    }
-    
-    @media (max-width: 380px) {
-        .text-sidebar {
-            flex-direction: row;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 15px;
-            scroll-snap-type: x mandatory;
-        }
-        
-        .step-item {
-            flex: 0 0 auto;
-            width: 85%;
-            scroll-snap-align: center;
-        }
     }
 }
 
