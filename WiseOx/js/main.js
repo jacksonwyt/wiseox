@@ -25,39 +25,67 @@
 
         // Initialize scroll animations with Waypoints
         function setupScrollAnimations() {
-            const scrollGifs = $('.scroll-gif');
-            const stepItems = $('.step-item');
+            const scrollGifs = document.querySelectorAll('.scroll-gif');
+            const stepItems = document.querySelectorAll('.step-item');
             
-            scrollGifs.each(function(index) {
-                const gif = $(this);
-                const stepItem = stepItems.eq(index);
-                
-                new Waypoint({
-                    element: gif[0],
-                    handler: function(direction) {
+            // Remove any existing observers
+            if (window.scrollObserver) {
+                window.scrollObserver.disconnect();
+            }
+
+            // Determine if we're on mobile
+            const isMobile = window.innerWidth <= 768;
+            
+            // Configure threshold based on device
+            const observerThreshold = isMobile ? 0.3 : 0.6;
+            const observerMargin = isMobile ? '-5% 0px -5% 0px' : '-10% 0px -10% 0px';
+
+            // Create new intersection observer
+            window.scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const gif = entry.target;
+                        const index = Array.from(scrollGifs).indexOf(gif);
+                        
                         // Remove active class from all items
-                        scrollGifs.removeClass('active');
-                        stepItems.removeClass('active');
+                        scrollGifs.forEach(g => g.classList.remove('active'));
+                        stepItems.forEach(item => item.classList.remove('active'));
                         
                         // Add active class to current items
-                        gif.addClass('active');
-                        stepItem.addClass('active');
-                    },
-                    offset: '60%' // Trigger when element is 60% from the top of the viewport
+                        gif.classList.add('active');
+                        if (stepItems[index]) {
+                            stepItems[index].classList.add('active');
+                            
+                            // On mobile, scroll the step into view in the sidebar
+                            if (isMobile && stepItems[index].scrollIntoView) {
+                                stepItems[index].scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'nearest',
+                                    inline: 'center'
+                                });
+                            }
+                        }
+                    }
                 });
+            }, {
+                threshold: observerThreshold,
+                rootMargin: observerMargin
             });
             
-            // Make the sidebar sticky using Waypoints Sticky
-            const sidebar = $('.text-sidebar-wrapper')[0];
-            if (sidebar) {
-                const stickyOffset = $('.navbar').outerHeight() + 20; // Navbar height plus some padding
-                
-                new Waypoint.Sticky({
-                    element: sidebar,
-                    offset: stickyOffset,
-                    stuckClass: 'sticky-sidebar'
+            // Observe all GIFs
+            scrollGifs.forEach(gif => window.scrollObserver.observe(gif));
+            
+            // Add click/touch events to step items
+            stepItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    if (scrollGifs[index]) {
+                        scrollGifs[index].scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
                 });
-            }
+            });
         }
 
         // Initialize scroll animations
@@ -65,7 +93,7 @@
         
         // Reinitialize on resize with debounce
         let resizeTimer;
-        $(window).on('resize', function() {
+        window.addEventListener('resize', function() {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(setupScrollAnimations, 250);
         });

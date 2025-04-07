@@ -496,49 +496,40 @@ img {
 
 /* Scroll Animations Section */
 .scroll-animations-section {
-    padding: 80px 0;
-    overflow: hidden;
+    padding: 100px 0;
+    background-color: #f9f9f9;
 }
 
 .scroll-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    display: flex;
+    gap: 40px;
     position: relative;
-    min-height: 500px;
 }
 
 .text-sidebar-wrapper {
-    position: relative;
-    height: fit-content;
-    z-index: 10;
-}
-
-.text-sidebar-wrapper.sticky-sidebar {
-    position: fixed;
-    top: 100px; /* Will be adjusted by JavaScript based on navbar height */
-    width: calc(50% - 45px); /* Half of container minus gap/2 */
-    max-height: calc(100vh - 150px);
-    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 40%;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
 }
 
 .text-sidebar {
-    background-color: var(--light-color);
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    padding: 30px;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
+    width: 100%;
 }
 
 .step-item {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    opacity: 0.4;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.5;
     transition: opacity 0.3s ease;
+    cursor: pointer;
 }
 
 .step-item.active {
@@ -546,32 +537,28 @@ img {
 }
 
 .step-number {
-    font-size: 42px;
     font-weight: 700;
-    color: var(--primary-color);
-    line-height: 1;
+    font-size: 1.5rem;
+    color: #333;
 }
 
 .step-title {
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 500;
-    color: var(--text-color);
 }
 
 .gifs-area {
-    padding-top: 20px;
-    padding-bottom: 100px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 100px; /* This controls the scroll distance between animations */
 }
 
 .scroll-gif {
     width: 100%;
-    max-width: 500px;
-    margin: 0 auto 150px;
+    height: auto;
     opacity: 0.3;
-    transition: all 0.4s ease;
-    background: none !important;
-    box-shadow: none;
-    border: none;
+    transition: opacity 0.3s ease;
 }
 
 .scroll-gif.active {
@@ -581,7 +568,7 @@ img {
 /* Mobile Optimization for Scroll Animations */
 @media (max-width: 768px) {
     .scroll-section {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 20px;
     }
 
@@ -590,9 +577,12 @@ img {
         top: 0 !important;
         width: 100% !important;
         height: auto;
-        min-height: 300px;
+        min-height: 200px;
         padding-right: 0;
         margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .text-sidebar {
@@ -600,10 +590,29 @@ img {
         flex-direction: column;
         gap: 20px;
         height: auto;
+        max-width: 320px;
+    }
+
+    .step-item {
+        padding: 10px 15px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .step-item.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .step-item.active .step-number,
+    .step-item.active .step-title {
+        color: white;
     }
 
     .step-number {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     .step-title {
@@ -611,17 +620,64 @@ img {
     }
 
     .gifs-area {
-        padding-top: 10px;
-        padding-bottom: 50px;
+        width: 100%;
+        padding: 10px 15px;
+        gap: 50px;
     }
 
     .scroll-gif {
-        margin: 0 auto 100px;
+        margin: 0 auto;
         max-width: 100%;
+        opacity: 0.8;
     }
+    
+    .scroll-gif.active {
+        opacity: 1;
+        transform: scale(1.02);
+        transition: all 0.3s ease;
+    }
+    
+    .step-item:active {
+        transform: scale(0.98);
+    }
+}
 
-    .scroll-gif:last-child {
-        margin-bottom: 50px;
+/* Mobile-specific styling for step indicators */
+@media (max-width: 768px) {
+    .text-sidebar {
+        padding: 15px;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        width: 100%;
+    }
+    
+    .text-sidebar-wrapper {
+        position: relative;
+        height: auto;
+        min-height: auto;
+        max-height: none;
+        padding: 20px 0;
+        margin-bottom: 20px;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    @media (max-width: 380px) {
+        .text-sidebar {
+            flex-direction: row;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .step-item {
+            flex: 0 0 auto;
+            width: 85%;
+            scroll-snap-align: center;
+        }
     }
 }
 
@@ -1077,12 +1133,12 @@ img {
         min-width: 170px !important;
     }
     
-    /* Fix for sticky sidebar on tablets */
     .text-sidebar-wrapper {
         position: sticky;
-        top: 90px;
-        height: calc(100vh - 130px);
-        max-height: 500px;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
     }
     
     .mobile-menu-btn {
@@ -1112,8 +1168,10 @@ img {
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .text-sidebar-wrapper {
         position: sticky;
-        top: 100px;
-        height: calc(100vh - 140px);
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
     }
 }
 
@@ -1134,32 +1192,6 @@ img {
         /* Allow logos to be colorful on mobile without hover */
         filter: grayscale(30%);
         opacity: 0.9;
-    }
-}
-
-/* Mobile-specific styling for step indicators */
-@media (max-width: 768px) {
-    .text-sidebar {
-        padding: 20px;
-        height: auto;
-        max-height: none;
-        overflow: visible;
-        position: relative;
-    }
-    
-    .text-sidebar-wrapper {
-        position: sticky;
-        top: 80px;
-        height: fit-content;
-        min-height: 300px;
-        max-height: calc(100vh - 100px);
-        padding-right: 0;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .step-number {
-        font-size: 36px;
     }
 }
 
