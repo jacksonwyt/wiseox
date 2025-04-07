@@ -775,6 +775,13 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .preloader-spinner {

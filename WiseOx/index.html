@@ -40,22 +40,17 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     
     <!-- Custom JS -->
     <script src="js/main.js"></script>
     
     <script>
         $(document).ready(function() {
-            // Hide preloader
-            window.addEventListener('load', () => {
-                document.querySelector('.preloader').style.display = 'none';
-            });
-            
             // Initialize Swiper for logo scroll
             new Swiper('.logo-swiper', {
                 slidesPerView: 'auto',
@@ -138,7 +133,7 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             
-            <div class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false">
+            <div class="mobile-menu-btn" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </div>
         </div>

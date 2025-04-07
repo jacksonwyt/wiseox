@@ -81,10 +81,10 @@
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="case-studies.html">Case Studies</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="#" class="active">Contact</a></li>
             </ul>
             
-            <div class="mobile-menu-btn" aria-label="Toggle navigation" aria-expanded="false">
+            <div class="mobile-menu-btn" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -219,51 +219,56 @@
             // Mobile menu toggle
             $('.mobile-menu-btn').on('click', function() {
                 $('.nav-menu').toggleClass('active');
-                $(this).find('i').toggleClass('fa-bars fa-times');
-                $(this).attr('aria-expanded', $('.nav-menu').hasClass('active'));
+                $(this).toggleClass('active');
             });
             
-            // Contact form submission
-$('#contactForm').on('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = {
-        name: $('#name').val().trim(),
-        email: $('#email').val().trim(),
-        phone: $('#phone').val().trim(),
-        subject: $('#subject').val().trim(),
-        message: $('#message').val().trim()
-    };
-    
-    // Disable submit button and show loading state
-    const submitBtn = $(this).find('button[type="submit"]');
-    const originalBtnText = submitBtn.text();
-    submitBtn.prop('disabled', true).text('Sending...');
-    
-    // Send the form data to our API endpoint
-    $.ajax({
-        url: '/api/contact',
-        type: 'POST',
-        data: JSON.stringify(formData),
-        contentType: 'application/json',
-        success: function(response) {
-            // Show success message
-            alert('Thank you for your message. We will get back to you soon!');
-            // Reset the form
-            $('#contactForm').trigger('reset');
-        },
-        error: function(xhr, status, error) {
-            // Show error message
-            console.error('Error:', error);
-            alert('There was an error sending your message. Please try again later.');
-        },
-        complete: function() {
-            // Re-enable submit button
-            submitBtn.prop('disabled', false).text(originalBtnText);
-        }
-    });
-});
+            // Form validation
+            $('#contactForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const nameField = $('#name');
+                const emailField = $('#email');
+                const messageField = $('#message');
+                
+                // Reset errors
+                $('.form-control').removeClass('error');
+                
+                // Validate name
+                if (nameField.val().trim() === '') {
+                    nameField.addClass('error');
+                    isValid = false;
+                }
+                
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailField.val())) {
+                    emailField.addClass('error');
+                    isValid = false;
+                }
+                
+                // Validate message
+                if (messageField.val().trim() === '') {
+                    messageField.addClass('error');
+                    isValid = false;
+                }
+                
+                // Submit if valid
+                if (isValid) {
+                    // Simulate form submission
+                    $('.form-status').html('<div class="success">Thank you! Your message has been sent successfully.</div>').fadeIn();
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(function() {
+                        $('.form-status').fadeOut();
+                    }, 5000);
+                } else {
+                    $('.form-status').html('<div class="error">Please complete all required fields correctly.</div>').fadeIn();
+                }
+            });
             
             // Animation on scroll function
             function animateOnScroll() {
