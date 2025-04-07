@@ -45,6 +45,7 @@
         function setupScrollAnimations() {
             const scrollGifs = document.querySelectorAll('.scroll-gif');
             const stepItems = document.querySelectorAll('.step-item');
+            const isMobile = window.innerWidth <= 768;
             
             // Remove any existing observers
             if (window.scrollObserver) {
@@ -62,32 +63,42 @@
             stepItems.forEach(item => item.style.display = 'flex');
             scrollGifs.forEach(gif => gif.style.display = 'block');
 
-            // Create intersection observer
-            window.scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const gif = entry.target;
-                    const index = Array.from(scrollGifs).indexOf(gif);
-                    
-                    // Calculate visibility ratio
-                    const ratio = entry.intersectionRatio;
-                    
-                    // Only activate if the element is more than 50% visible
-                    if (ratio > 0.5 && entry.isIntersecting) {
-                        // Deactivate all items first
-                        scrollGifs.forEach(g => g.classList.remove('active'));
-                        stepItems.forEach(step => step.classList.remove('active'));
-                        
-                        // Activate current items
-                        gif.classList.add('active');
-                        if (stepItems[index]) {
-                            stepItems[index].classList.add('active');
-                        }
-                    }
+            // On mobile, ensure all mobile captions are visible
+            if (isMobile) {
+                document.querySelectorAll('.mobile-caption').forEach(caption => {
+                    caption.style.display = 'block';
                 });
-            }, observerOptions);
+                // Set all GIFs as active for mobile view
+                scrollGifs.forEach(gif => gif.classList.add('active'));
+            } else {
+                // Only use the intersection observer for desktop
+                // Create intersection observer
+                window.scrollObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const gif = entry.target;
+                        const index = Array.from(scrollGifs).indexOf(gif);
+                        
+                        // Calculate visibility ratio
+                        const ratio = entry.intersectionRatio;
+                        
+                        // Only activate if the element is more than 50% visible
+                        if (ratio > 0.5 && entry.isIntersecting) {
+                            // Deactivate all items first
+                            scrollGifs.forEach(g => g.classList.remove('active'));
+                            stepItems.forEach(step => step.classList.remove('active'));
+                            
+                            // Activate current items
+                            gif.classList.add('active');
+                            if (stepItems[index]) {
+                                stepItems[index].classList.add('active');
+                            }
+                        }
+                    });
+                }, observerOptions);
 
-            // Observe all GIFs
-            scrollGifs.forEach(gif => window.scrollObserver.observe(gif));
+                // Observe all GIFs
+                scrollGifs.forEach(gif => window.scrollObserver.observe(gif));
+            }
 
             // Add click handlers for step items
             stepItems.forEach((item, index) => {
@@ -104,7 +115,7 @@
             
             // Activate first items by default after a short delay
             setTimeout(() => {
-                if (scrollGifs[0] && stepItems[0]) {
+                if (!isMobile && scrollGifs[0] && stepItems[0]) {
                     scrollGifs[0].classList.add('active');
                     stepItems[0].classList.add('active');
                 }
@@ -151,14 +162,22 @@
         
         // Reinitialize on resize with debounce
         let resizeTimer;
+        let previousIsMobile = window.innerWidth <= 768;
+        
         $(window).on('resize', function() {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
-                setupScrollAnimations();
-                setupStickySidebar(); // Re-setup sticky sidebar on resize
+                const currentIsMobile = window.innerWidth <= 768;
+                
+                // Only reinitialize if we're crossing the mobile breakpoint
+                if (previousIsMobile !== currentIsMobile) {
+                    setupScrollAnimations();
+                    setupStickySidebar(); // Re-setup sticky sidebar on resize
+                    previousIsMobile = currentIsMobile;
+                }
                 
                 // Reset mobile menu state on resize
-                if ($(window).width() > 768) {
+                if (window.innerWidth > 768) {
                     $('.nav-menu').removeClass('active');
                     $('.mobile-menu-btn').html('<i class="fas fa-bars"></i>');
                 }

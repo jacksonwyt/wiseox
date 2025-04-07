@@ -626,6 +626,26 @@ img {
     /* Show the mobile captions */
     .mobile-caption {
         display: block;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--primary-color);
+        padding: 8px 15px;
+        background-color: rgba(180, 171, 212, 0.1);
+        border-radius: 8px;
+    }
+
+    .mobile-caption .step-number {
+        font-weight: 700;
+        margin-right: 8px;
+        font-size: 1.3rem;
+        color: var(--primary-color);
+    }
+
+    .mobile-caption .step-title {
+        font-weight: 500;
     }
 
     .scroll-gif:nth-child(1)::after,
