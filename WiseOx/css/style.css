@@ -627,6 +627,12 @@ img {
         margin-top: 15px;
         text-align: center;
     }
+
+    .scroll-gif:nth-child(1)::after { content: "01"; }
+    .scroll-gif:nth-child(2)::after { content: "02"; }
+    .scroll-gif:nth-child(3)::after { content: "03"; }
+    .scroll-gif:nth-child(4)::after { content: "04"; }
+    .scroll-gif:nth-child(5)::after { content: "05"; }
 }
 
 /* Section Heading Styles */
