@@ -142,8 +142,10 @@
         });
         
         // Sticky plus button for mobile navigation
-        $('.sticky-plus-btn').on('click', function(e) {
-            e.stopPropagation();
+        $('.sticky-plus-btn').on('click touchstart', function(e) {
+            e.preventDefault(); // Prevent default behavior
+            e.stopPropagation(); // Stop event bubbling
+            
             $('.nav-menu').toggleClass('active');
             $(this).toggleClass('active');
             
@@ -153,6 +155,8 @@
             } else {
                 $(this).html('<i class="fas fa-plus"></i>');
             }
+            
+            return false; // Additional measure to prevent default
         });
         
         // Close mobile menu when clicking anywhere else on the page

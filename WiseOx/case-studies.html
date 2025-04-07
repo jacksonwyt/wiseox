@@ -237,7 +237,10 @@
         });
         
         // Sticky plus button for mobile navigation
-        $('.sticky-plus-btn').on('click', function() {
+        $('.sticky-plus-btn').on('click touchstart', function(e) {
+            e.preventDefault(); // Prevent default behavior
+            e.stopPropagation(); // Stop event bubbling
+            
             $('.nav-menu').toggleClass('active');
             $(this).toggleClass('active');
             
@@ -247,6 +250,8 @@
             } else {
                 $(this).html('<i class="fas fa-plus"></i>');
             }
+            
+            return false; // Additional measure to prevent default
         });
         
         // Close menu when clicking outside
@@ -330,5 +335,26 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Additional script for sticky plus button to ensure it works -->
+    <script>
+        $(document).ready(function() {
+            $('.sticky-plus-btn').on('click touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                $('.nav-menu').toggleClass('active');
+                $(this).toggleClass('active');
+                
+                if ($('.nav-menu').hasClass('active')) {
+                    $(this).html('<i class="fas fa-times"></i>');
+                } else {
+                    $(this).html('<i class="fas fa-plus"></i>');
+                }
+                
+                return false;
+            });
+        });
+    </script>
 </body>
 </html>
