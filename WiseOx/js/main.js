@@ -37,8 +37,15 @@
             const isMobile = window.innerWidth <= 768;
             
             // Configure threshold based on device
-            const observerThreshold = isMobile ? 0.3 : 0.6;
-            const observerMargin = isMobile ? '-5% 0px -5% 0px' : '-10% 0px -10% 0px';
+            const observerThreshold = isMobile ? 0.2 : 0.6;
+            const observerMargin = isMobile ? '0px 0px -25% 0px' : '-10% 0px -10% 0px';
+            
+            // Make sure all step items are visible initially
+            if (isMobile) {
+                stepItems.forEach((item, index) => {
+                    item.style.display = 'flex';
+                });
+            }
 
             // Create new intersection observer
             window.scrollObserver = new IntersectionObserver((entries) => {
@@ -107,6 +114,21 @@
                     }
                 });
             });
+            
+            // If on deployment, force reflow to ensure styles are applied
+            setTimeout(() => {
+                const sidebarWrapper = document.querySelector('.text-sidebar-wrapper');
+                if (sidebarWrapper) {
+                    sidebarWrapper.style.display = 'block';
+                    sidebarWrapper.offsetHeight; // Force reflow
+                }
+                
+                // Activate first item by default
+                if (scrollGifs[0] && stepItems[0]) {
+                    scrollGifs[0].classList.add('active');
+                    stepItems[0].classList.add('active');
+                }
+            }, 500);
         }
 
         // Initialize scroll animations

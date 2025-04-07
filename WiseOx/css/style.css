@@ -601,12 +601,16 @@ img {
         z-index: 10; /* Ensure sidebar appears above content */
         background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
         padding: 10px 0;
-        margin-bottom: 0;
+        margin-bottom: 20px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: block !important;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
     }
 
     .text-sidebar {
         padding: 10px;
+        display: flex;
         flex-direction: row;
         overflow-x: auto;
         white-space: nowrap;
@@ -622,7 +626,7 @@ img {
 
     .step-item {
         flex: 0 0 auto;
-        min-width: 160px; /* Fixed width for items */
+        min-width: 120px; /* Smaller fixed width to show more items */
         margin-right: 10px;
         padding: 10px 15px;
         background-color: rgba(255, 255, 255, 0.8);
@@ -630,6 +634,10 @@ img {
         scroll-snap-align: center;
         opacity: 0.7;
         transform: none;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
     .step-item.active {
@@ -649,8 +657,6 @@ img {
         padding: 0 15px;
         gap: 100px; /* Maintain gap between images */
     }
-    
-    /* Remove duplicate media query for very small screens */
 }
 
 /* Fix mobile navbar - Update this section */
@@ -694,29 +700,6 @@ img {
         padding: 10px 0;
         width: 100%;
         font-size: 18px;
-    }
-}
-
-/* Remove duplicate media queries that might be causing conflicts */
-@media (max-width: 768px) {
-    .text-sidebar {
-        padding: 10px;
-        height: auto;
-        max-height: none;
-        overflow-x: auto;
-        width: 100%;
-    }
-    
-    .text-sidebar-wrapper {
-        position: sticky !important;
-        top: 80px !important;
-        height: auto;
-        min-height: auto;
-        max-height: none;
-        padding: 0;
-        margin-bottom: 0;
-        overflow-y: visible;
-        -webkit-overflow-scrolling: touch;
     }
 }
 
