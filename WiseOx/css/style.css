@@ -607,32 +607,34 @@ img {
         order: 1;
         display: flex;
         flex-direction: column;
-        gap: 50px;
+        gap: 20px;
     }
 
     .scroll-gif {
         width: 100%;
         height: auto;
         opacity: 1 !important;
-        margin-bottom: 10px;
+        margin-bottom: 0;
         position: relative;
     }
 
+    /* Hide the ::after content since we're using explicit elements now */
     .scroll-gif::after {
-        content: attr(data-step);
-        display: block;
-        font-size: 1.1rem;
-        font-weight: 500;
-        color: var(--primary-color);
-        margin-top: 15px;
-        text-align: center;
+        content: none;
     }
 
-    .scroll-gif:nth-child(1)::after { content: "01"; }
-    .scroll-gif:nth-child(2)::after { content: "02"; }
-    .scroll-gif:nth-child(3)::after { content: "03"; }
-    .scroll-gif:nth-child(4)::after { content: "04"; }
-    .scroll-gif:nth-child(5)::after { content: "05"; }
+    /* Show the mobile captions */
+    .mobile-caption {
+        display: block;
+    }
+
+    .scroll-gif:nth-child(1)::after,
+    .scroll-gif:nth-child(2)::after,
+    .scroll-gif:nth-child(3)::after,
+    .scroll-gif:nth-child(4)::after,
+    .scroll-gif:nth-child(5)::after {
+        content: none;
+    }
 }
 
 /* Section Heading Styles */
@@ -1369,4 +1371,19 @@ img {
             left: 0;
         }
     }
+}
+
+.mobile-caption {
+    display: none;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.mobile-caption .step-number {
+    font-weight: 700;
+    margin-right: 5px;
 }
