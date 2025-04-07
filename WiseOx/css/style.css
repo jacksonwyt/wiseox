@@ -583,6 +583,11 @@ img {
     opacity: 1;
 }
 
+/* Hide mobile captions by default (for desktop) */
+.mobile-caption {
+    display: none;
+}
+
 /* Mobile Optimization for Scroll Animations - Updated */
 @media (max-width: 768px) {
     .scroll-section {

@@ -141,23 +141,39 @@
             }
         });
         
-        // Sticky plus button for mobile navigation
-        $('.sticky-plus-btn').on('click touchstart', function(e) {
-            e.preventDefault(); // Prevent default behavior
-            e.stopPropagation(); // Stop event bubbling
+        // Sticky plus button for mobile navigation - improved for mobile
+        document.querySelector('.sticky-plus-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            $('.nav-menu').toggleClass('active');
-            $(this).toggleClass('active');
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
             
             // Change icon between plus and times
-            if ($('.nav-menu').hasClass('active')) {
-                $(this).html('<i class="fas fa-times"></i>');
+            if (navMenu.classList.contains('active')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
             } else {
-                $(this).html('<i class="fas fa-plus"></i>');
+                this.innerHTML = '<i class="fas fa-plus"></i>';
             }
+        }, false);
+        
+        // Add touchstart for better mobile response
+        document.querySelector('.sticky-plus-btn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            return false; // Additional measure to prevent default
-        });
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            // Change icon between plus and times
+            if (navMenu.classList.contains('active')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                this.innerHTML = '<i class="fas fa-plus"></i>';
+            }
+        }, false);
         
         // Close mobile menu when clicking anywhere else on the page
         $(document).on('click', function(e) {
