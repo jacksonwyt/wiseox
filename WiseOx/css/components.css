@@ -135,7 +135,6 @@
 }
 
 .swiper.logo-swiper .swiper-wrapper {
-    /* animation: scroll 20s linear infinite; */ /* Animation moved to utilities */
     display: flex;
     align-items: center;
 }
@@ -258,9 +257,7 @@
     color: var(--secondary-color);
 }
 
-.feature-card p { /* Assuming feature cards also have paragraphs */
-    /* Add styles if needed, e.g., font-size, color */
-}
+
 
 /* Footer Components */
 .footer-logo img {
@@ -488,6 +485,7 @@
     line-height: 1.6;
     margin-bottom: 24px;
     color: var(--text-color);
+    min-height: 110px; /* Prevent layout jump from typewriter */
 }
 
 .case-study-result { /* Highlighted result/metric */
@@ -548,13 +546,10 @@
     height: 100%;
     width: 2px;
     background: var(--primary-color);
-    /* animation: blink 0.7s infinite; */ /* Animation moved to utilities */
 }
 
 /* Scroll Animation Text Styles */
-.step-item.active .step-title { /* Style for active title, if different */
-    /* Example: color: var(--primary-color); */
-}
+
 
 /* Responsive Component Adjustments */
 
@@ -647,12 +642,7 @@
         color: var(--primary-color);
     }
 
-    /* Adjustments for case studies page nav on mobile */
-    /* .case-studies-section .nav-menu { ... } */ /* If specific overrides needed */
 
-    .case-studies-list { /* Ensure styles from layout are here if needed */
-        /* Example: grid-template-columns: 1fr; */
-    }
 
     .company-logo {
         height: 120px; /* Adjust logo size */
@@ -660,6 +650,7 @@
 
     .case-study-description {
         font-size: 16px;
+        min-height: 130px; /* Prevent layout jump on mobile */
     }
 
     .case-study-result {
