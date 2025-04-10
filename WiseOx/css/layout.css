@@ -265,15 +265,12 @@
     }
 }
 
-/* Small to Medium Devices (Tablets & Landscape Phones) */
-@media (max-width: 991.98px) {
-    .container {
-        /* No change needed usually, handled by max-width */
-    }
-}
-
 /* Small devices (Phones & Tablets Portrait) */
 @media (max-width: 767.98px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .scroll-section {
         flex-direction: column;
         gap: 20px;
