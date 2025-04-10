@@ -87,7 +87,7 @@
     /* Add styles for icon appearance (e.g., Font Awesome) */
 }
 
-/* Sticky Plus Button (Mobile Nav Toggle) */
+/* Sticky Plus Button (Mobile Nav Toggle) - Restored */
 .sticky-plus-btn {
     display: none; /* Hidden by default */
     position: fixed;
@@ -163,6 +163,7 @@
     max-width: 100% !important;
     width: auto !important;
     object-fit: contain;
+    aspect-ratio: 2 / 1; /* Placeholder: Adjust based on actual logo aspect ratios */
 }
 
 /* Client Logos (Non-Swiper Version) */
@@ -178,6 +179,13 @@
 .client-logo:hover {
     filter: grayscale(0%);
     opacity: 1;
+}
+
+.company-logo img {
+    max-width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+    aspect-ratio: 2 / 1; /* Placeholder: Adjust based on actual logo aspect ratios */
 }
 
 /* Animation Card */
@@ -471,21 +479,6 @@
 }
 
 /* Case Studies Components */
-.company-logo { /* Logo container on case study page */
-    width: 100%;
-    height: 140px; /* Default */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-}
-
-.company-logo img {
-    max-width: 80%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
 .case-study-content { /* Text content area */
     padding: 0 20px;
 }
@@ -568,9 +561,9 @@
 /* Tablet & Smaller */
 @media (max-width: 991.98px) {
     .mobile-menu-btn {
-        display: block; /* Show hamburger on tablets */
+        display: block; /* Show hamburger on tablet/mobile */
     }
-
+    
     .nav-menu { /* Tablet flyout menu */
         position: fixed;
         top: 74px; /* Below navbar */
@@ -600,45 +593,50 @@
 /* Mobile (Portrait & Landscape) */
 @media (max-width: 767.98px) {
     .mobile-menu-btn {
-        display: none; /* Hide hamburger, use sticky button */
+        display: none; /* Hide hamburger on phones */
     }
-
+    
     .sticky-plus-btn {
-        display: block; /* Show sticky button */
+        display: block; /* Show sticky button on phones */
     }
-
-    .nav-menu { /* Mobile pop-up menu */
+    
+    .nav-menu { /* Mobile pop-up menu - Adjusted positioning */
         position: fixed;
-        top: auto;
-        bottom: 80px; /* Position above sticky button */
-        left: auto;
-        right: 20px;
-        width: auto; /* Adjust width based on content */
-        min-width: 150px; /* Ensure minimum width */
-        height: auto;
+        top: 0;
+        left: 0; /* Changed from right: 0 */
+        width: 100vw; /* Changed from 80% */
+        height: 100vh; /* Changed from 100% */
+        background-color: rgba(255, 255, 255, 0.98); /* Slightly transparent white background */
+        backdrop-filter: blur(10px); /* Add blur effect */
+        -webkit-backdrop-filter: blur(10px); /* Safari support */
+        padding: 100px 30px 30px 30px; /* Increased top padding */
         flex-direction: column;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-        padding: 15px;
-        z-index: 1000;
-        opacity: 0;
-        transform: scale(0.8);
-        transform-origin: bottom right; /* Animate from button */
-        pointer-events: none;
+        align-items: center; /* Center items vertically */
+        justify-content: center; /* Center items horizontally */
+        transform: translateX(100%); /* Start off-screen to the right */
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother transition */
+        z-index: 9998; /* Below sticky button */
+        box-shadow: none; /* Removed shadow */
+        overflow-y: auto; /* Allow scrolling if content overflows */
     }
 
     .nav-menu.active {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: all;
+        transform: translateX(0%); /* Slide in from the right */
     }
 
     .nav-menu li {
-        margin: 10px 0; /* Vertical spacing */
+        margin: 0 0 25px 0; /* Adjusted margin for vertical layout */
         width: 100%;
-        text-align: center; /* Center align items */
+        text-align: center;
+    }
+
+    .nav-menu a {
+        font-size: 2rem; /* Larger font size for nav items */
+        font-weight: 600;
+        padding: 15px 0; /* More vertical padding */
+        display: block; /* Make link fill width */
+        width: 100%;
+        color: var(--secondary-color); /* Ensure color is set */
     }
 
     .mobile-caption {

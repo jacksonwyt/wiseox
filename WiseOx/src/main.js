@@ -16,7 +16,11 @@ import { createLogoScroller } from './templates/logoScroller.js';
 
 let lottieInstances = {}; // Define outside to persist across calls
 
-// Determine current page for active nav link
+/**
+ * Determines the current page based on the URL pathname.
+ * Used for setting the active state in the navigation.
+ * @returns {string} The identifier for the current page ('home', 'case-studies', 'contact') or an empty string if unknown.
+ */
 export function getCurrentPage() {
   const path = window.location.pathname;
   if (path.endsWith('/') || path.endsWith('index.html')) {
@@ -37,7 +41,11 @@ function initializePage() {
     const currentPage = getCurrentPage();
     let csrfToken = null; // Variable to store the CSRF token
 
-    // Function to fetch CSRF token
+    /**
+     * Fetches the CSRF token from the API endpoint.
+     * Stores the token in the csrfToken variable if successful.
+     * @async
+     */
     async function fetchCsrfToken() {
       try {
         const response = await fetch('/api/get-csrf-token');
@@ -81,7 +89,11 @@ function initializePage() {
         await fetchCsrfToken(); // Wait for token before setting up form
       }
 
-      // Mobile menu toggle logic (now centralized here)
+      /**
+       * Sets up the mobile navigation toggle functionality.
+       * Handles opening/closing the menu, focus trapping, and event listeners
+       * for the hamburger button and menu interactions.
+       */
       function setupMobileNavToggle() {
         const $navMenu = $('.nav-menu');
         const $mobileBtn = $('.mobile-menu-btn'); // Standard hamburger
@@ -89,11 +101,16 @@ function initializePage() {
         const focusableSelector = 'a[href]'; // Selector for focusable elements within menu
         let triggerElement = null; // To store the element that opened the menu
 
+        /**
+         * Opens the mobile navigation menu.
+         * Adds active classes, updates button state, and traps focus.
+         * @param {HTMLElement} [buttonClicked] - The button element that triggered the open action.
+         */
         function openMenu(buttonClicked) {
           triggerElement = buttonClicked || document.activeElement; // Store the button that was clicked/focused
           $navMenu.addClass('active');
-          $mobileBtn.addClass('active'); // Keep both visually active
-          $stickyBtn.addClass('active').html('<i class="fas fa-times"></i>');
+          $mobileBtn.addClass('active'); // Keep hamburger visually active (if visible)
+          $stickyBtn.addClass('active').html('<i class="fas fa-times"></i>'); // Set sticky to active/close icon
 
           // Wait for animation, then focus first item
           setTimeout(() => {
@@ -106,13 +123,18 @@ function initializePage() {
           }, 100); // Adjust timeout if needed based on CSS transition
         }
 
+        /**
+         * Closes the mobile navigation menu.
+         * Removes active classes, updates button state, removes focus trap,
+         * and restores focus to the element that opened the menu.
+         */
         function closeMenu() {
           // Remove keydown listener first
           $(document).off('keydown.navMenuFocusTrap');
 
           $navMenu.removeClass('active');
           $mobileBtn.removeClass('active');
-          $stickyBtn.removeClass('active').html('<i class="fas fa-plus"></i>');
+          $stickyBtn.removeClass('active').html('<i class="fas fa-plus"></i>'); // Reset sticky to inactive/plus icon
 
           // Restore focus to the element that opened the menu
           if (triggerElement && typeof triggerElement.focus === 'function') {
@@ -121,6 +143,11 @@ function initializePage() {
           triggerElement = null; // Clear the stored element
         }
 
+        /**
+         * Handles focus trapping within the open mobile navigation menu.
+         * Prevents Tab key from moving focus outside the menu.
+         * @param {jQuery.Event} e - The keydown event object.
+         */
         function handleFocusTrap(e) {
           if (e.key !== 'Tab' || !$navMenu.hasClass('active')) {
             return; // Ignore if not Tab key or menu isn't active
@@ -158,7 +185,7 @@ function initializePage() {
         });
 
         // Handle clicks/touches on the sticky plus button
-        $(document).on('click touchstart', '.sticky-plus-btn', function (e) {
+        $(document).on('click', '.sticky-plus-btn', function (e) {
           e.preventDefault();
           e.stopPropagation();
           if ($navMenu.hasClass('active')) {
@@ -172,7 +199,7 @@ function initializePage() {
         // Close menu when clicking outside
         $(document).on('click', function (event) {
           const $target = $(event.target);
-          if (!$target.closest('.mobile-menu-btn, .sticky-plus-btn, .nav-menu').length && $navMenu.hasClass('active')) {
+          if (!$target.closest('.mobile-menu-btn, .sticky-plus-btn, .nav-menu').length && $navMenu.hasClass('active')) { // Check both buttons
             closeMenu();
           }
         });
@@ -263,7 +290,10 @@ function initializePage() {
       }
       // --- End Typewriter Effect ---
 
-      // Ensure sticky sidebar works properly
+      /**
+       * Adjusts the minimum height of the scroll section container
+       * to ensure the sticky sidebar has enough scrollable space.
+       */
       function setupStickySidebar() {
         const sidebar = document.querySelector('.text-sidebar-wrapper');
         const scrollSection = document.querySelector('.scroll-section');
@@ -281,7 +311,12 @@ function initializePage() {
       // Initialize sticky sidebar
       setupStickySidebar();
 
-      // Initialize scroll animations
+      /**
+       * Initializes Lottie animations for the scroll-based interaction section.
+       * Uses IntersectionObserver on desktop to play/pause animations and update text steps.
+       * Plays all animations continuously on mobile.
+       * Handles cleanup of existing observers and Lottie instances before re-initializing.
+       */
       function setupScrollAnimations() {
         // Check if Lottie library is loaded
         if (typeof lottie === 'undefined') {
@@ -446,7 +481,12 @@ function initializePage() {
       // Initialize scroll animations
       setupScrollAnimations();
 
-      // Form validation for contact page
+      /**
+       * Sets up the contact form validation and submission logic.
+       * Includes basic validation for required fields and email format.
+       * Handles asynchronous form submission to the /api/contact endpoint,
+       * including CSRF token handling and displaying success/error messages.
+       */
       function setupContactForm() {
         const form = document.getElementById('contactForm');
         if (!form) return; // Only run if form exists
@@ -547,7 +587,11 @@ function initializePage() {
       }
       setupContactForm();
 
-      // Scroll to top button functionality
+      /**
+       * Sets up the scroll-to-top button functionality.
+       * Shows the button when the user scrolls down and hides it near the top.
+       * Animates scrolling back to the top when the button is clicked.
+       */
       function setupScrollToTop() {
         const scrollTopBtn = $('.scroll-top');
         if (!scrollTopBtn.length) return; // Check if element exists
@@ -567,12 +611,20 @@ function initializePage() {
       }
       setupScrollToTop(); // Call the function
 
-      // Generic animations (like animate-slide-up)
+      /**
+       * Sets up generic scroll-triggered animations for elements with specific classes
+       * (e.g., .animate-slide-up, .animate-fade-in).
+       * Uses a helper function to check if an element is in the viewport.
+       */
       function setupGenericAnimations() {
         const animatedElements = $('.animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-fade-in');
         if (!animatedElements.length) return;
 
-        // Function to check if element is in viewport (more robust version)
+        /**
+         * Checks if a given element is currently within the browser viewport.
+         * @param {HTMLElement} element - The DOM element to check.
+         * @returns {boolean} True if the element is at least partially in the viewport, false otherwise.
+         */
         function isInViewport(element) {
           if (!element) return false;
           const rect = element.getBoundingClientRect();
@@ -584,6 +636,12 @@ function initializePage() {
           );
         }
 
+        /**
+         * Callback function executed on scroll and resize events.
+         * Iterates through elements marked for generic animation and adds
+         * the 'animated' and specific animation classes (e.g., 'slide-up-active')
+         * when they enter the viewport.
+         */
         function animateOnScroll() {
           animatedElements.each(function () {
             try { // Add try block inside loop

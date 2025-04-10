@@ -56,14 +56,14 @@ This document outlines a comprehensive plan to enhance the WiseOx Media website,
 - [~] Add unit tests for critical JavaScript functionality (Partially done: Set up Vitest/JSDOM, tested getCurrentPage)
 - [x] Address the remaining ESLint errors (specifically the no-plusplus in api/contact.js).
 ### 3.2 Responsive Design Refinement
-- [ ] Audit and fix inconsistent responsive breakpoints
-- [ ] Improve mobile navigation experience
-- [ ] Ensure all interactive elements are touch-friendly
-- [ ] Test and optimize for various screen sizes
+- [x] Audit and fix inconsistent responsive breakpoints
+- [x] Improve mobile navigation experience (Simplified to hamburger-only, then reverted to sticky button + hamburger with adjusted visibility)
+- [x] Ensure all interactive elements are touch-friendly (Increased mobile nav link padding, reviewed sticky button properties)
+- [x] Test and optimize for various screen sizes
 
 ### 3.3 Documentation
-- [~] Create a detailed README.md with setup and development instructions (Partially done, minimal content)
-- [ ] Add inline code documentation using JSDoc (Confirmed minimal usage)
+- [x] Create a detailed README.md with setup and development instructions (Added sections for Overview, Getting Started, Development, Building, Deployment, Structure)
+- [x] Add inline code documentation using JSDoc (Added to all functions in main.js)
 - [ ] Document component usage and examples
 - [ ] Create a style guide for future development
 
@@ -73,14 +73,14 @@ This document outlines a comprehensive plan to enhance the WiseOx Media website,
 - [ ] Compress all images without quality loss
 - [ ] Convert images to modern formats (WebP with fallbacks)
 - [ ] Implement responsive images with srcset and sizes (Confirmed pending)
-- [ ] Add proper dimensions to all images (Confirmed pending)
-- [~] Add lazy loading to below-the-fold images (Partially done, some images use loading="lazy")
+- [~] Add proper dimensions to all images (Added aspect-ratio CSS as an alternative for CLS prevention, requires ratio verification)
+- [x] Add lazy loading to below-the-fold images (Applied loading="lazy"/"eager" appropriately)
 
 ### 4.2 Script Optimization
-- [ ] Use async/defer attributes for non-critical scripts (Confirmed pending)
-- [ ] Implement code splitting for JavaScript (Confirmed pending)
-- [ ] Optimize third-party script loading
-- [~] Reduce JavaScript bundle size (Confirmed pending, no build process)
+- [x] Use async/defer attributes for non-critical scripts (Added defer to external library scripts)
+- [~] Implement code splitting for JavaScript (Partially handled by Vite, further optimization pending)
+- [~] Optimize third-party script loading (Defer added, further optimization pending)
+- [~] Reduce JavaScript bundle size (Partially handled by Vite/defer, further optimization pending)
 
 ### 4.3 Core Web Vitals
 - [ ] Optimize Largest Contentful Paint (LCP)
