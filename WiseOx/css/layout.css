@@ -164,14 +164,15 @@
     position: relative;
     max-width: 100%;
     min-height: 800px;
-    margin-top: 40px;
+    margin-top: 10px;
+    padding-bottom: 30vh;
 }
 
 .text-sidebar-wrapper {
     position: -webkit-sticky;
     position: sticky;
     top: 120px;
-    transform: none;
+    transform: translateY(35%);
     max-height: calc(100vh - 160px);
     width: 40%;
     align-self: flex-start;
