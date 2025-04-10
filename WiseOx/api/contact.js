@@ -1,5 +1,6 @@
 // api/contact.js
 const nodemailer = require('nodemailer');
+const cookie = require('cookie'); // Add cookie parser
 
 // Simple in-memory rate limiting store
 // In a production environment, consider using Redis or a similar data store
@@ -9,13 +10,13 @@ const rateLimit = {
   resetTime: Date.now(),
   windowMs: 3600000, // 1 hour in milliseconds
   maxRequestsPerIP: 10, // Max requests per IP address in the time window
-  maxRequestsPerEmail: 3 // Max requests per email address in the time window
+  maxRequestsPerEmail: 3, // Max requests per email address in the time window
 };
 
 // Function to clean up old rate limit entries every hour
 const cleanupRateLimits = () => {
   const now = Date.now();
-  
+
   // If more than an hour has passed since last reset
   if (now - rateLimit.resetTime > rateLimit.windowMs) {
     rateLimit.ipRequests = {};
@@ -28,34 +29,34 @@ const cleanupRateLimits = () => {
 const checkRateLimit = (ip, email) => {
   // Clean up old entries first
   cleanupRateLimits();
-  
+
   // Initialize if not exists
   rateLimit.ipRequests[ip] = rateLimit.ipRequests[ip] || 0;
   rateLimit.emailRequests[email] = rateLimit.emailRequests[email] || 0;
-  
+
   // Check limits
   if (rateLimit.ipRequests[ip] >= rateLimit.maxRequestsPerIP) {
     return { limited: true, reason: 'IP address has sent too many requests. Please try again later.' };
   }
-  
+
   if (rateLimit.emailRequests[email] >= rateLimit.maxRequestsPerEmail) {
     return { limited: true, reason: 'This email address has been used too many times. Please try again later.' };
   }
-  
+
   // Increment counters
-  rateLimit.ipRequests[ip]++;
-  rateLimit.emailRequests[email]++;
-  
+  rateLimit.ipRequests[ip] += 1;
+  rateLimit.emailRequests[email] += 1;
+
   return { limited: false };
 };
 
 // Helper function to sanitize input
 const sanitizeInput = (input) => {
   if (!input) return '';
-  
+
   // Convert to string if it's not already
   const str = String(input);
-  
+
   // Replace potentially dangerous characters with HTML entities
   return str
     .replace(/&/g, '&amp;')
@@ -66,13 +67,13 @@ const sanitizeInput = (input) => {
 };
 
 module.exports = async (req, res) => {
-  // Set CORS headers
+  // Set CORS headers (ensure X-CSRF-Token is allowed)
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust in production!
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
   );
 
   // Handle preflight OPTIONS request
@@ -82,39 +83,57 @@ module.exports = async (req, res) => {
 
   // Only allow POST method
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
-  
-  // Get client IP address from Vercel headers or from request
-  const clientIP = req.headers['x-forwarded-for'] || 
-                  req.headers['x-real-ip'] || 
-                  req.connection.remoteAddress || 
-                  '0.0.0.0';
 
   try {
-    const { name, email, phone, subject, message } = req.body;
-    
+    // ---> CSRF Token Verification <---
+    const cookies = cookie.parse(req.headers.cookie || '');
+    const tokenFromCookie = cookies['__Host-csrf-token'];
+    const tokenFromHeader = req.headers['x-csrf-token'];
+
+    if (!tokenFromCookie || !tokenFromHeader || tokenFromCookie !== tokenFromHeader) {
+      console.warn('CSRF Token validation failed.', {
+        hasCookie: !!tokenFromCookie,
+        hasHeader: !!tokenFromHeader,
+        match: tokenFromCookie === tokenFromHeader,
+      });
+      return res.status(403).json({ error: 'Invalid CSRF Token' });
+    }
+    // ---> End CSRF Token Verification <---
+
+    // Get client IP address
+    const clientIP = req.headers['x-forwarded-for']
+                    || req.headers['x-real-ip']
+                    || req.connection.remoteAddress
+                    || '0.0.0.0';
+
+    const {
+      name, email, phone, subject, message,
+    } = req.body;
+
     // Simple validation
     if (!name || !email || !subject || !message) {
       return res.status(400).json({ error: 'Please fill all required fields' });
     }
-    
+
     // Check rate limit before processing
     const rateLimitResult = checkRateLimit(clientIP, email);
     if (rateLimitResult.limited) {
-      return res.status(429).json({ 
-        error: 'Too many requests', 
-        message: rateLimitResult.reason 
+      return res.status(429).json({
+        error: 'Too many requests',
+        message: rateLimitResult.reason,
       });
     }
-    
+
     // Sanitize all inputs
     const sanitizedName = sanitizeInput(name);
     const sanitizedEmail = sanitizeInput(email);
     const sanitizedPhone = sanitizeInput(phone);
     const sanitizedSubject = sanitizeInput(subject);
     const sanitizedMessage = sanitizeInput(message);
-    
+
     // Email validation using regex
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(sanitizedEmail)) {
@@ -168,8 +187,11 @@ module.exports = async (req, res) => {
     // Return success response
     return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Error sending email:', error);
-    // Don't expose detailed error information in production
+    console.error('Error processing contact form:', error);
+    // Avoid exposing CSRF errors directly if caught here, general error is safer
+    if (error.message === 'Invalid CSRF Token') { // Check if it was our CSRF error
+      return res.status(403).json({ error: 'Invalid CSRF Token' });
+    }
     return res.status(500).json({ error: 'Failed to send email' });
   }
 };

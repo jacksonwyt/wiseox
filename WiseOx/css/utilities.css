@@ -1,0 +1,126 @@
+/* Wise Ox Website Utility Styles */
+
+/* Keyframe Animations */
+@keyframes scroll { /* Logo Swiper */
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%); /* Needs adjustment based on logo count/width */
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes logoScroll { /* Old logo scroll, might be unused? */
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%); /* Needs adjustment */
+    }
+}
+
+@keyframes blink { /* Typewriter cursor */
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Animation Utility Classes */
+.animate-fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.animate-slide-up {
+    animation: slideInUp 0.8s ease forwards;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+/* Animation Delay Utility Classes */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+/* Apply animations */
+.swiper.logo-swiper .swiper-wrapper {
+    animation: scroll 20s linear infinite; /* Apply logo scroll animation */
+}
+
+.typewriter-container::after {
+    animation: blink 0.7s infinite; /* Apply typewriter blink */
+}
+
+/* Miscellaneous Utilities (if any identified later) */
+
+/* Example: Text alignment helpers */
+/*
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+*/
+
+/* Example: Margin/Padding helpers */
+/*
+.mt-1 { margin-top: 1rem; }
+.mb-1 { margin-bottom: 1rem; }
+.p-1 { padding: 1rem; }
+*/ 

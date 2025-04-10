@@ -1,0 +1,384 @@
+/* Wise Ox Website Layout Styles */
+
+/* General Layout */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Default */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header */
+.header {
+    padding-top: 150px;
+    padding-bottom: 50px;
+    background-color: var(--light-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-content {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 30px;
+}
+
+.header-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+/* Header Text Styles */
+.header h1 {
+    font-size: 48px; /* Default */
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.header p {
+    font-size: 18px; /* Default */
+    margin-bottom: 30px;
+}
+
+/* Navbar Structure (Positioning & Container) */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white; /* Base background */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 12px 0; /* Default padding */
+    transition: all 0.3s ease; /* For sticky transition */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sticky Navbar State */
+.navbar.sticky {
+    padding: 8px 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Logo Section */
+.logo-section {
+    padding: 30px 0;
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+}
+
+.logo-section h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: var(--secondary-color);
+}
+
+/* Animations Section */
+.animations-section {
+    padding: 80px 0;
+    background-color: var(--light-color);
+}
+
+.animations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Animations Section Heading */
+.animations-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 32px;
+    color: var(--secondary-color);
+}
+
+/* Why Choose Us Section */
+.why-us-section {
+    padding: 80px 0;
+    background-color: white;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Why Choose Us Section Heading */
+.why-us-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 32px;
+    color: var(--secondary-color);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Scroll Animations Section */
+.scroll-animations-section {
+    padding: 100px 0;
+    background-color: #f9f9f9;
+    overflow: visible;
+}
+
+.scroll-section {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    max-width: 100%;
+    min-height: 800px;
+    margin-top: 40px;
+}
+
+.text-sidebar-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px; /* Adjust based on navbar height */
+    transform: none;
+    height: calc(100vh - 160px); /* Adjust based on navbar and desired spacing */
+    width: 40%;
+    align-self: flex-start;
+    z-index: 10;
+}
+
+.text-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+}
+
+.gifs-area {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 100px; /* Spacing between Lottie animations */
+    padding: 20px 0;
+}
+
+/* Contact Page Layout */
+.contact-section {
+    padding: 80px 0;
+    background-color: var(--light-color);
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+/* Case Studies Page Layout */
+.case-studies-section {
+    padding: 180px 0 80px; /* Adjust top padding for fixed navbar */
+    background-color: var(--light-color);
+}
+
+.case-studies-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex; /* Changed from grid for easier wrapping */
+    justify-content: center;
+    gap: 40px;
+}
+
+.case-study-item { /* Layout container for each study */
+    flex: 1;
+    max-width: 360px;
+    text-align: center;
+    padding: 20px;
+}
+
+.case-study-logo { /* Added from style.css */
+    flex: 0 0 300px;
+}
+
+.case-study-header .content { /* Added from style.css */
+    flex: 1;
+}
+
+.other-partners-section {
+    margin-top: 80px;
+    text-align: center;
+}
+
+/* Responsive Layout Adjustments */
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .header .container {
+        flex-direction: column;
+    }
+
+    .header-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .text-sidebar-wrapper {
+        display: flex; /* Keep sticky behavior on tablets */
+        align-items: center;
+    }
+}
+
+/* Small to Medium Devices (Tablets & Landscape Phones) */
+@media (max-width: 991.98px) {
+    .container {
+        /* No change needed usually, handled by max-width */
+    }
+}
+
+/* Small devices (Phones & Tablets Portrait) */
+@media (max-width: 767.98px) {
+    .scroll-section {
+        flex-direction: column;
+        gap: 20px;
+        min-height: auto;
+    }
+
+    .text-sidebar-wrapper {
+        position: static;
+        height: auto;
+        width: 100%;
+        display: block; /* Changed from none */
+    }
+
+    .text-sidebar {
+        display: none; /* Hidden on mobile, captions used instead */
+    }
+
+    .gifs-area {
+        width: 100%;
+        order: 1; /* Lottie animations first */
+        gap: 20px; /* Reduced gap */
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr; /* Stack contact sections */
+        flex-direction: column; /* Redundant but confirms stacking */
+    }
+
+    .contact-info {
+        order: 2; /* Info below form */
+    }
+
+    .contact-form {
+        order: 1; /* Form above info */
+    }
+
+    .case-studies-section {
+        padding: 100px 0 60px;
+    }
+
+    .case-studies-list {
+        flex-direction: column; /* Stack case studies */
+        align-items: center;
+    }
+
+    .case-study-item {
+        max-width: 500px; /* Allow wider cards */
+        width: 100%;
+        margin-bottom: 60px;
+    }
+
+    .case-study-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .partners-grid { /* Assuming this exists for partner logos */
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Extra small devices (phones) */
+@media (max-width: 575.98px) {
+    .header {
+        padding-top: 100px;
+        padding-bottom: 30px;
+    }
+
+    .header-content {
+        text-align: center;
+        min-width: 100%;
+        padding-right: 0;
+    }
+
+    .header-image {
+        display: block; /* Ensure it shows if hidden */
+        min-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Hide navbar logo on home page only on mobile */
+    .navbar-home .logo { /* Specific layout rule */
+        display: none;
+    }
+}
+
+/* Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+     .header {
+        padding-top: 90px; /* Slightly less padding */
+        padding-bottom: 40px;
+    }
+}
+
+
+/* Large devices (desktops) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+     .text-sidebar-wrapper {
+         /* Already sticky from wider rule, might need adjustments */
+        display: flex;
+        align-items: center;
+     }
+}
+
+/* Extra large devices */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px; /* Adjust max width for larger screens */
+    }
+} 

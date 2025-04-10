@@ -1,1 +1,10 @@
 .vercel
+
+# Vite build output
+dist/
+
+# Vite cache
+.vite/
+
+# Node modules
+node_modules/

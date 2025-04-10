@@ -38,44 +38,48 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <!-- Links below are removed as they are imported via src/styles.css -->
+    <!--
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    -->
     
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script 
+        src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+        crossorigin="anonymous"></script>
     
     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script 
+        src="https://unpkg.com/swiper/swiper-bundle.min.js" 
+        integrity="sha384-Z8zwe4UlCA9xiPVMGPhmzBsPAEVtt/gabOsU+0A8Lf67I0MjHjP+UzNYng2CtJar"
+        crossorigin="anonymous"></script>
+    
+    <!-- Lottie Player -->
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" 
+        integrity="sha384-J8C0MvgX4WP58J4N2W99vCKd2J6z99ynOJ5bEfE6jeP7kVTW1drYtv/jzrxM5jbm"
+        crossorigin="anonymous"></script>
     
     <!-- Waypoints -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js" 
+        integrity="sha384-hKAOvu4SRkR5UhOl+rvozhqPNh0VgjTz0sydNTzye3vkV6VzpbLACSgthC2bhXeV"
+        crossorigin="anonymous"></script>
     
     <!-- Custom JS -->
-    <script src="js/main.js"></script>
+    <!-- Removed: <script src="js/main.js"></script> -->
+    
+    <!-- Vite entry point -->
+    <script type="module" src="/src/main.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-home">
-        <div class="container">
-            <a href="#" class="logo">
-                <img src="images/wiseox_logo.png" alt="Wise Ox">
-            </a>
-            
-            <ul class="nav-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="case-studies.html">Case Studies</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            
-            <div class="mobile-menu-btn" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Sticky Plus Button for Mobile Navigation -->
-    <div class="sticky-plus-btn" aria-label="Toggle navigation">
-        <i class="fas fa-plus"></i>
-    </div>
+    <div id="navbar-placeholder"></div>
+    <div id="mobile-nav-button-placeholder"></div>
     
     <!-- Header -->
     <header class="header">
@@ -93,61 +97,8 @@
     </header>
     
     <!-- Logo Scroll Section -->
-    <section class="logo-section">
-        <div class="swiper logo-swiper">
-            <div class="swiper-wrapper">
-                <!-- First set of logos -->
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/MajesticPure_logo.png" alt="MajesticPure" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/SoulSpa_logo.png" alt="SoulSpa" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/Ganix_logo.png" alt="Ganix" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/MADO_logo.png" alt="MADO" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/phrasly_logo.png" alt="Phrasly" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/utopia_logo.png" alt="Utopia" loading="lazy">
-                </div>
-                <!-- Duplicate set of logos for seamless loop -->
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/MajesticPure_logo.png" alt="MajesticPure" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/NexonBotanicals_logo.png" alt="Nexon Botanicals" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/SoulSpa_logo.png" alt="SoulSpa" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/Ganix_logo.png" alt="Ganix" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/AlfiesChoice.png" alt="Alfies Choice" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/MADO_logo.png" alt="MADO" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/phrasly_logo.png" alt="Phrasly" loading="lazy">
-                </div>
-                <div class="swiper-slide client-logo">
-                    <img src="images/logos/utopia_logo.png" alt="Utopia" loading="lazy">
-                </div>
-            </div>
-        </div>
+    <section class="logo-section logo-scroller-placeholder">
+        <!-- Logo scroller content will be injected here by main.js -->
     </section>
     
     <!-- Scroll Animations Section -->
@@ -188,21 +139,21 @@
                     </div>
                 </div>
                 
-                <!-- Right side - Scrollable GIFs -->
+                <!-- Right side - Scrollable Lottie Animations -->
                 <div class="gifs-area">
-                    <img class="scroll-gif" src="images/animations/Business strategy.gif" alt="Strategic Marketing Planning" data-step="01 - Strategic Marketing Planning" style="background: none !important;">
+                    <div class="lottie-animation" data-step="1" data-json-path="images/animations/Business strategy.json"></div>
                     <div class="mobile-caption"><span class="step-number">01</span> <span class="step-title">Strategic Marketing Planning</span></div>
                     
-                    <img class="scroll-gif" src="images/animations/Target Evaluation.gif" alt="Target Audience Analysis" data-step="02 - Target Audience Analysis" style="background: none !important;">
+                    <div class="lottie-animation" data-step="2" data-json-path="images/animations/Target Evaluation.json"></div>
                     <div class="mobile-caption"><span class="step-number">02</span> <span class="step-title">Target Audience Analysis</span></div>
                     
-                    <img class="scroll-gif" src="images/animations/Pay Per Click Digital Marketing.gif" alt="PPC Advertising" data-step="03 - Pay-Per-Click Advertising" style="background: none !important;">
+                    <div class="lottie-animation" data-step="3" data-json-path="images/animations/Pay Per Click Digital Marketing.json"></div>
                     <div class="mobile-caption"><span class="step-number">03</span> <span class="step-title">Pay-Per-Click Advertising</span></div>
                     
-                    <img class="scroll-gif" src="images/animations/Product Promotion.gif" alt="Product Promotion" data-step="04 - Product Promotion" style="background: none !important;">
+                    <div class="lottie-animation" data-step="4" data-json-path="images/animations/Product Promotion.json"></div>
                     <div class="mobile-caption"><span class="step-number">04</span> <span class="step-title">Product Promotion</span></div>
                     
-                    <img class="scroll-gif" src="images/animations/Marketing Idea.gif" alt="Marketing Ideas" data-step="05 - Marketing Ideas" style="background: none !important;">
+                    <div class="lottie-animation" data-step="5" data-json-path="images/animations/Marketing Idea.json"></div>
                     <div class="mobile-caption"><span class="step-number">05</span> <span class="step-title">Marketing Ideas</span></div>
                 </div>
             </div>
@@ -266,66 +217,12 @@
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <div class="footer-logo">
-                        <img src="images/wiseox_logo.png" alt="Wise Ox">
-                    </div>
-                    <p>Innovative digital marketing solutions for businesses seeking growth and success in the digital landscape.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="case-studies.html">Case Studies</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> PO Box 5000 PMB 60 Rancho Santa Fe, CA 92067</li>
-                        <li><i class="fas fa-phone"></i> 858.705.7516</li>
-                        <li><i class="fas fa-envelope"></i> info@wiseoxmedia.com</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 Wise Ox. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
     
     <!-- Scroll to top button -->
     <div class="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </div>
-    
-    <!-- Additional script for sticky plus button to ensure it works -->
-    <script>
-        $(document).ready(function() {
-            $('.sticky-plus-btn').on('click touchstart', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                $('.nav-menu').toggleClass('active');
-                $(this).toggleClass('active');
-                
-                if ($('.nav-menu').hasClass('active')) {
-                    $(this).html('<i class="fas fa-times"></i>');
-                } else {
-                    $(this).html('<i class="fas fa-plus"></i>');
-                }
-                
-                return false;
-            });
-        });
-    </script>
 </body>
 </html>

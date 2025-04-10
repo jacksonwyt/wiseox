@@ -1,0 +1,7 @@
+/* Import existing modular CSS files */
+@import '../css/base.css';
+@import '../css/layout.css';
+@import '../css/components.css';
+@import '../css/utilities.css';
+
+/* Add any global styles specific to Vite build below if needed */
