@@ -141,8 +141,8 @@
 
 .swiper-slide.client-logo {
     width: auto !important;
-    min-width: 180px !important; /* Default */
-    height: 80px !important; /* Default */
+    min-width: 150px !important; /* Adjusted min-width slightly */
+    /* height: 80px !important; */ /* REMOVED: Height constraint moved to img */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -158,7 +158,8 @@
 }
 
 .swiper-slide.client-logo img {
-    max-height: 100% !important;
+    /* max-height: 100% !important; */ /* REMOVED: Using fixed height now */
+    height: 100px !important; /* ADDED: Set fixed height for all logos */
     max-width: 100% !important;
     width: auto !important;
     object-fit: contain;
