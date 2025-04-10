@@ -485,13 +485,14 @@
     line-height: 1.6;
     margin-bottom: 24px;
     color: var(--text-color);
-    min-height: 110px; /* Prevent layout jump from typewriter */
+    min-height: 200px; /* Prevent layout jump from typewriter */
 }
 
 .case-study-result { /* Highlighted result/metric */
     font-size: 24px; /* Default */
     font-weight: 600;
     color: var(--text-color);
+    min-height: 70px; /* Prevent layout jump from typewriter */
 }
 
 .metric-value { /* The actual number/percentage */
@@ -642,19 +643,14 @@
         color: var(--primary-color);
     }
 
-
-
-    .company-logo {
-        height: 120px; /* Adjust logo size */
-    }
-
     .case-study-description {
         font-size: 16px;
-        min-height: 130px; /* Prevent layout jump on mobile */
+        min-height: 140px; /* Prevent layout jump on mobile */
     }
 
     .case-study-result {
         font-size: 20px;
+        min-height: 50px; /* Prevent layout jump on mobile */
     }
 }
 
