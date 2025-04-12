@@ -1,6 +1,6 @@
 // api/contact.js
-const nodemailer = require('nodemailer');
-const cookie = require('cookie'); // Add cookie parser
+import nodemailer from 'nodemailer';
+import * as cookie from 'cookie';
 
 // Simple in-memory rate limiting store
 // In a production environment, consider using Redis or a similar data store
@@ -66,7 +66,7 @@ const sanitizeInput = (input) => {
     .replace(/'/g, '&#039;');
 };
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Set CORS headers (ensure X-CSRF-Token is allowed)
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust in production!

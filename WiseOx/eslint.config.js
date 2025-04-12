@@ -78,12 +78,12 @@ export default [
     },
   },
 
-  // Configuration for API routes (Node.js, CommonJS)
+  // Configuration for API routes (Node.js, ES Modules)
   {
     files: ['api/**/*.js'],
     languageOptions: {
       ...baseLanguageOptions,
-      sourceType: 'commonjs',
+      sourceType: 'module',
       globals: {
         ...globals.node,
       },
@@ -93,8 +93,8 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       ...customRules,
-      // Node/CommonJS specific overrides
-      'import/no-commonjs': 'off', // Allow CommonJS
+      // Node/ES Module specific overrides
+      'import/no-commonjs': 'error',
       'import/extensions': 'off',
       'import/no-extraneous-dependencies': 'off', // Node API might require various deps
     },
