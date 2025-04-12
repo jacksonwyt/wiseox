@@ -105,5 +105,5 @@ WiseOx/
 └── README.md         # This file
 ```
 
-
- ## -T.J.W
+## COPYRIGHT © 2025 WiseOx Media
+## -T.J.W
