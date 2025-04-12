@@ -1,6 +1,9 @@
 // Import main stylesheet
 import './styles.css';
-import $ from 'jquery'; // Add jQuery import
+import $ from 'jquery';
+import Swiper from 'swiper/bundle'; // Import Swiper bundle
+import 'swiper/css/bundle'; // Import Swiper styles bundle
+import lottie from 'lottie-web'; // Import Lottie library
 
 // Import template generators
 import { createNavbar } from './templates/navbar.js';
@@ -19,7 +22,7 @@ let lottieInstances = {}; // Define outside to persist across calls
 /**
  * Determines the current page based on the URL pathname.
  * Used for setting the active state in the navigation.
- * @returns {string} The identifier for the current page ('home', 'case-studies', 'contact') or an empty string if unknown.
+ * @returns {string}
  */
 export function getCurrentPage() {
   const path = window.location.pathname;
@@ -107,7 +110,7 @@ function initializePage() {
          * @param {HTMLElement} [buttonClicked] - The button element that triggered the open action.
          */
         function openMenu(buttonClicked) {
-          triggerElement = buttonClicked || document.activeElement; // Store the button that was clicked/focused
+          triggerElement = buttonClicked || document.activeElement;
           $navMenu.addClass('active');
           $mobileBtn.addClass('active'); // Keep hamburger visually active (if visible)
           $stickyBtn.addClass('active').html('<i class="fas fa-times"></i>'); // Set sticky to active/close icon
@@ -430,7 +433,6 @@ function initializePage() {
                 }
               });
 
-              // Fallback: If scrolling fast & none are intersecting > 50%, keep the *last* active one visible or activate first
               if (!activeEntryFoundThisCycle && firstAnimationActivated) { /* eslint-disable-line max-len */
                 // Don't change anything, let the last active one remain visible/playing
               } else if (!activeEntryFoundThisCycle && !firstAnimationActivated) {
@@ -623,7 +625,7 @@ function initializePage() {
         /**
          * Checks if a given element is currently within the browser viewport.
          * @param {HTMLElement} element - The DOM element to check.
-         * @returns {boolean} True if the element is at least partially in the viewport, false otherwise.
+         * @returns {boolean}
          */
         function isInViewport(element) {
           if (!element) return false;
@@ -674,7 +676,7 @@ function initializePage() {
       setupGenericAnimations();
     }); // End $(document).ready
   } catch (error) { // Add top-level catch
-    console.error("Critical error during page initialization:", error);
+    console.error('Critical error during page initialization:', error);
     // Optionally display a user-facing message indicating a site error
     // document.body.innerHTML = 'An error occurred loading the page. Please try refreshing.';
   }
