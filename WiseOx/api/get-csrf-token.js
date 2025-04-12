@@ -1,7 +1,7 @@
-const crypto = require('crypto');
-const cookie = require('cookie'); // Vercel might handle this, but being explicit is safer
+import crypto from 'crypto';
+import * as cookie from 'cookie'; // Vercel might handle this, but being explicit is safer
 
-module.exports = (req, res) => {
+export default function handler(req, res) {
   // Only allow GET requests for this endpoint
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
