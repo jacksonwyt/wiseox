@@ -26,7 +26,6 @@ It is built using:
 1.  **Clone the repository:**
     ```bash
     git clone <repository-url>
-    cd WiseOx
     ```
 2.  **Install dependencies:**
     ```bash
@@ -83,7 +82,7 @@ This project is configured for deployment on Vercel.
 ## Project Structure
 
 ```
-WiseOx/
+./
 ├── api/              # Serverless functions (e.g., contact form)
 ├── css/              # Modular CSS files
 ├── public/           # Static assets (images, favicon) copied to dist root
@@ -105,5 +104,5 @@ WiseOx/
 └── README.md         # This file
 ```
 
-## COPYRIGHT © 2025 WiseOx Media
+## COPYRIGHT 2025 WiseOx Media
 ## -T.J.W
