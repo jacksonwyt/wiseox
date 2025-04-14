@@ -78,6 +78,35 @@ export default [
     },
   },
 
+  // Configuration for test files (using Vitest)
+  {
+    files: ['src/**/*.test.js'],
+    languageOptions: {
+      ...baseLanguageOptions,
+      globals: {
+        ...globals.node, // Or browser, depending on test env? jsdom implies browser-like
+        ...globals.browser, // Add browser globals for jsdom environment
+        // Vitest globals
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly', // Add other vitest globals if needed
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+      },
+    },
+    plugins: basePlugins,
+    settings: baseSettings,
+    rules: {
+      ...js.configs.recommended.rules,
+      ...customRules,
+      // Test specific overrides
+      'import/no-extraneous-dependencies': ['error', { devDependencies: true }], // ALLOW devDeps in tests
+    },
+  },
+
   // Configuration for API routes (Node.js, ES Modules)
   {
     files: ['api/**/*.js'],

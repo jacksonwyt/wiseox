@@ -42,27 +42,6 @@ export function getCurrentPage() {
 function initializePage() {
   try { // Add top-level try
     const currentPage = getCurrentPage();
-    let csrfToken = null; // Variable to store the CSRF token
-
-    /**
-     * Fetches the CSRF token from the API endpoint.
-     * Stores the token in the csrfToken variable if successful.
-     * @async
-     */
-    async function fetchCsrfToken() {
-      try {
-        const response = await fetch('/api/get-csrf-token');
-        if (!response.ok) {
-          throw new Error('Failed to fetch CSRF token');
-        }
-        const data = await response.json();
-        csrfToken = data.csrfToken;
-        console.info('CSRF token fetched successfully.');
-      } catch (error) {
-        console.warn('Error fetching CSRF token:', error);
-        // Optionally display an error to the user
-      }
-    }
 
     // Inject templates
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
@@ -86,12 +65,7 @@ function initializePage() {
     // --- All other initializations go AFTER templates are injected ---
 
     // Ensure jQuery is ready before using $
-    $(document).ready(async function () { // Make this async to await token fetch
-      // Fetch CSRF token if on the contact page
-      if (currentPage === 'contact') {
-        await fetchCsrfToken(); // Wait for token before setting up form
-      }
-
+    $(document).ready(function () {
       /**
        * Sets up the mobile navigation toggle functionality.
        * Handles opening/closing the menu, focus trapping, and event listeners
@@ -152,27 +126,24 @@ function initializePage() {
          * @param {jQuery.Event} e - The keydown event object.
          */
         function handleFocusTrap(e) {
-          if (e.key !== 'Tab' || !$navMenu.hasClass('active')) {
-            return; // Ignore if not Tab key or menu isn't active
-          }
+          if (e.key !== 'Tab') return; // Only handle Tab key
 
-          const focusableElements = $navMenu.find(focusableSelector);
-          if (!focusableElements.length) return; // No focusable elements found
+          const focusableElements = $navMenu.find(focusableSelector).filter(':visible');
+          if (focusableElements.length === 0) return; // No focusable elements
 
           const firstFocusable = focusableElements.first();
           const lastFocusable = focusableElements.last();
+          const currentFocus = document.activeElement;
 
-          if (e.shiftKey) {
-            // Shift + Tab
-            if (document.activeElement === firstFocusable[0]) {
+          if (e.shiftKey) { // Shift + Tab
+            if (currentFocus === firstFocusable[0]) {
               e.preventDefault();
-              lastFocusable.focus();
+              lastFocusable.focus(); // Wrap to last element
             }
-          } else {
-            // Tab
-            if (document.activeElement === lastFocusable[0]) {
+          } else { // Tab
+            if (currentFocus === lastFocusable[0]) {
               e.preventDefault();
-              firstFocusable.focus();
+              firstFocusable.focus(); // Wrap to first element
             }
           }
         }
@@ -501,7 +472,7 @@ function initializePage() {
           form.appendChild(statusDiv); // Append it to the form
         }
 
-        $(form).on('submit', async function (e) {
+        $(form).on('submit', function (e) {
           e.preventDefault();
 
           // Clear previous status
@@ -511,8 +482,9 @@ function initializePage() {
           let isValid = true;
           const nameField = $('#name');
           const emailField = $('#email');
-          const subjectField = $('#subject'); // Add subject validation
+          const subjectField = $('#subject'); // Keep subject validation
           const messageField = $('#message');
+          const phoneField = $('#phone'); // Get phone field
 
           // Validate name
           if (nameField.val().trim() === '') {
@@ -539,50 +511,40 @@ function initializePage() {
             isValid = false;
           }
 
-          // Submit if valid
+          // If valid, construct mailto link and open email client
           if (isValid) {
-            const formData = {
-              name: nameField.val(),
-              email: emailField.val(),
-              phone: $('#phone').val(), // Include phone
-              subject: subjectField.val(),
-              message: messageField.val(),
-            };
+            const recipientEmail = 'info@wiseoxmedia.com'; // Define recipient email
+            const subject = subjectField.val();
+            const name = nameField.val();
+            const email = emailField.val();
+            const phone = phoneField.val(); // Get phone value
+            const message = messageField.val();
 
-            try {
-              // Show loading state
-              $(this).find('button[type="submit"]').prop('disabled', true).text('Sending...');
+            // Construct the email body
+            const body = `
+Name: ${name}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
 
-              // Check if CSRF token is available
-              if (!csrfToken) {
-                throw new Error('CSRF token not available. Please refresh the page.');
-              }
+Message:
+${message}
+            `.trim(); // Use trim() to remove leading/trailing whitespace
 
-              const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRF-Token': csrfToken, // Include CSRF token in header
-                },
-                body: JSON.stringify(formData),
-              });
+            // Construct the mailto link - encode subject and body
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-              const result = await response.json();
+            // Open the user's default email client
+            window.location.href = mailtoLink;
 
-              if (response.ok) {
-                $(statusDiv).html('<div class="success">Thank you! Your message has been sent successfully.</div>').fadeIn();
-                this.reset(); // Reset form
-              } else {
-                throw new Error(result.message || 'Form submission failed');
-              }
-            } catch (error) {
-              console.error('Form submission error:', error);
-              $(statusDiv).html(`<div class="error">Error: ${error.message || 'Could not send message.'}</div>`).fadeIn();
-            } finally {
-              // Restore button state
-              $(this).find('button[type="submit"]').prop('disabled', false).text('Send Message');
-            }
+            // Provide feedback and reset the form after a short delay
+            $(statusDiv).html('<div class="success">Opening your email application...</div>').fadeIn();
+            setTimeout(() => {
+              this.reset();
+              // Optionally clear the status message after a bit longer
+              setTimeout(() => $(statusDiv).fadeOut(), 5000);
+            }, 500);
           } else {
+            // Show validation error message
             $(statusDiv).html('<div class="error">Please complete all required fields correctly.</div>').fadeIn();
           }
         });
